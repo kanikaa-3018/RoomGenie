@@ -112,8 +112,8 @@ const MatchCard = ({ match, onShortlist, isShortlisted }) => {
           onClick={() => onShortlist(match)}
           className={`w-full py-3 rounded-2xl font-semibold transition-all flex items-center justify-center space-x-2 ${
             isShortlisted
-              ? "bg-accent text-white shadow-lg"
-              : "bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg"
+              ? "bg-accent text-black shadow-lg"
+              : "bg-gradient-to-r from-primary to-accent text-brown-400 hover:shadow-lg"
           }`}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
