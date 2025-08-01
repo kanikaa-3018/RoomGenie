@@ -1,197 +1,467 @@
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-
-// const Hero = () => {
-//   const navigate = useNavigate();
-
-//   return (
-//     <section className="bg-[#e5e5e5] h-[100dvh] w-full flex flex-col overflow-hidden relative">
-//       {/* Decorative Images */}
-//       <img
-//         src="/assets/images/illus1.png"
-//         alt="Right decoration"
-//         className="absolute bottom-[-25px] left-[-25px] scale-[1.45] max-w-none w-60 md:w-80 opacity-100 z-0 pointer-events-none"
-//       />
-//       <img
-//         src="/assets/images/illus2.png"
-//         alt="Right decoration"
-//         className="absolute bottom-[-25px] right-[25px] scale-150 md:scale-175 max-w-none w-60 md:w-80 opacity-100 z-0 pointer-events-none"
-//       />
-
-//       <img
-//         src="/assets/images/doodle-1.png"
-//         alt="Left decoration"
-//         className="absolute bottom-[150px] left-[180px] max-w-none w-[60px] md:w-80 opacity-100 z-0 pointer-events-none"
-//       />
-//       <img
-//         src="/assets/images/doodle-2.png"
-//         alt="Right decoration"
-//         className="absolute scale-[0.5] bottom-[250px] right-[250px] max-w-none w-[100px] md:w-80 opacity-100 z-0 pointer-events-none"
-//       />
-
-//       {/* Navbar */}
-//       <nav className="flex justify-between items-center text-[#794E3C] px-12 py-8">
-//         <div className="text-2xl font-bold" style={{ fontFamily: "Virgil" }}>
-//           RoomGenie
-//         </div>
-//         <ul
-//           className="hidden md:flex gap-10 text-lg font-medium"
-//           style={{ fontFamily: "Virgil" }}
-//         >
-//           <li className="hover:font-bold cursor-pointer">Home</li>
-//           <li className="hover:font-bold cursor-pointer">About</li>
-//           <li className="hover:font-bold cursor-pointer">How it Works</li>
-//         </ul>
-//         <button className="bg-[#DA5444] hover:bg-[#c14435] text-white font-semibold py-2 px-6 rounded-xl text-sm shadow-md">
-//           Let's Start
-//         </button>
-//       </nav>
-
-//       {/* Centered Hero Content */}
-//       <div className="flex-1 flex justify-center pt-28 z-10">
-//         <div className="flex flex-col gap-10 items-center text-center">
-//           {/* Heading and Subheading */}
-//           <div className="flex flex-col gap-6">
-//             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-[#35012c] max-w-4xl">
-//               Where{" "}
-//               <span className="text-[#006d77]" style={{ fontFamily: "Virgil" }}>
-//                 roommates
-//               </span>{" "}
-//               click — and{" "}
-//               <span className="text-[#006d77]" style={{ fontFamily: "Virgil" }}>
-//                 comfort
-//               </span>{" "}
-//               meets home.
-//             </h1>
-//             <p className="text-[#3c096c] text-lg md:text-xl max-w-2xl self-center">
-//               Let RoomGenie find your match with just 5 chill questions. No
-//               drama, no awkwardness — just vibing with the right roomie.
-//             </p>
-//           </div>
-
-//           {/* CTA Buttons */}
-//           <div className="flex gap-6 flex-wrap justify-center">
-//             <button
-//               onClick={() => navigate("/signup")}
-//               className="bg-[#DA5444] hover:bg-[#c14435] text-white font-semibold py-3 px-8 rounded-xl text-lg shadow-md"
-//             >
-//               Sign Up
-//             </button>
-//             <button
-//               onClick={() => navigate("/login")}
-//               className="bg-[#412426] hover:bg-[#2f1a13] text-white font-semibold py-3 px-8 rounded-xl text-lg shadow-md"
-//             >
-//               Log In
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Hero;
-
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
+const lilac = "#b57bdb";
+const grayText = "#5a5a5a";
+const bgGray = "#f6f6f6";
 
 const Hero = () => {
-  const navigate = useNavigate();
-
   return (
-    <section
-      className="h-[100dvh] w-full flex flex-col overflow-hidden relative"
-      style={{
-        backgroundImage: "url('/assets/images/background%20img.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "#FCECCD", // fallback / tint
-      }}
-    >
-      {/* Optional tinted overlay to keep text legible */}
-      <div className="absolute inset-0 bg-[#FCECCD]/80 z-0"></div>
-      {/* Decorative Images */}
-      <img
-        src="/assets/images/illus1.png"
-        alt="Right decoration"
-        className="absolute bottom-[-25px] left-[-25px] scale-[1.45] max-w-none w-60 md:w-80 opacity-100 z-0 pointer-events-none"
-      />
-      <img
-        src="/assets/images/illus2.png"
-        alt="Right decoration"
-        className="absolute bottom-[-25px] right-[25px] scale-150 md:scale-175 max-w-none w-60 md:w-80 opacity-100 z-0 pointer-events-none"
-      />
+    <section>
+      <header class="bg-white">
+        <div class="px-4 mx-auto sm:px-6 lg:px-8 xl:px-12">
+          <div class="flex items-center justify-between h-16 lg:h-[72px]">
+            <div class="flex items-center flex-shrink-0">
+              <a href="#" title="" class="inline-flex">
+                <span class="sr-only"> Rareblocks logo </span>
+                <img
+                  class="w-auto h-8"
+                  src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/logo.svg"
+                  alt=""
+                />
+              </a>
+            </div>
 
-      <img
-        src="/assets/images/backgroundimg.png"
-        alt="Right decoration"
-        className="absolute bottom-[-50px] right-[25px] scale-150 md:scale-175 max-w-none w-60 md:w-80 opacity-100 z-0 pointer-events-none"
-      />
+            <div class="hidden lg:flex lg:justify-start lg:ml-16 lg:space-x-8 xl:space-x-14">
+              <a
+                href="#"
+                title=""
+                class="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none hover:text-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+              >
+                {" "}
+                All Artworks{" "}
+              </a>
 
-      <img
-        src="/assets/images/doodle-1.png"
-        alt="Left decoration"
-        className="absolute bottom-[150px] left-[180px] max-w-none w-[60px] md:w-80 opacity-100 z-0 pointer-events-none"
-      />
-      <img
-        src="/assets/images/doodle-2.png"
-        alt="Right decoration"
-        className="absolute scale-[0.5] bottom-[250px] right-[250px] max-w-none w-[100px] md:w-80 opacity-100 z-0 pointer-events-none"
-      />
-      {/* Navbar */}
-      <nav className="flex justify-between items-center text-[#794E3C] px-12 py-8 z-10">
-        <div className="text-2xl font-bold" style={{ fontFamily: "Virgil" }}>
-          RoomGenie
-        </div>
-        <ul
-          className="hidden md:flex gap-10 text-lg font-medium"
-          style={{ fontFamily: "Virgil" }}
-        >
-          <li className="hover:font-bold cursor-pointer">Home</li>
-          <li className="hover:font-bold cursor-pointer">About</li>
-          <li className="hover:font-bold cursor-pointer">How it Works</li>
-        </ul>
-        <button className="bg-[#DA5444] hover:bg-[#c14435] text-white font-semibold py-2 px-6 rounded-xl text-sm shadow-md">
-          Let's Start
-        </button>
-      </nav>
-      {/* Centered Hero Content */}
-      <div className="flex-1 flex justify-center pt-28 z-10">
-        <div className="flex flex-col gap-10 items-center text-center">
-          {/* Heading and Subheading */}
-          <div className="flex flex-col gap-6">
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-[#35012c] max-w-4xl">
-              Where{" "}
-              <span className="text-[#006d77]" style={{ fontFamily: "Virgil" }}>
-                roommates
-              </span>{" "}
-              click — and{" "}
-              <span className="text-[#006d77]" style={{ fontFamily: "Virgil" }}>
-                comfort
-              </span>{" "}
-              meets home.
-            </h1>
-            <p className="text-[#3c096c] text-lg md:text-xl max-w-2xl self-center">
-              Let RoomGenie find your match with just 5 chill questions. No
-              drama, no awkwardness — just vibing with the right roomie.
-            </p>
+              <a
+                href="#"
+                title=""
+                class="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+              >
+                {" "}
+                All Artists{" "}
+              </a>
+
+              <a
+                href="#"
+                title=""
+                class="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+              >
+                {" "}
+                Sell Your Artwork{" "}
+              </a>
+            </div>
+
+            <div class="flex items-center justify-end ml-auto">
+              <div class="hidden lg:flex lg:items-center lg:space-x-8">
+                <a
+                  href="#"
+                  title=""
+                  class="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                >
+                  {" "}
+                  Create Free Account{" "}
+                </a>
+
+                <a
+                  href="#"
+                  title=""
+                  class="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                >
+                  {" "}
+                  Login{" "}
+                </a>
+              </div>
+
+              <div class="flex items-center justify-end space-x-5">
+                <button
+                  type="button"
+                  class="p-2 -m-2 text-gray-900 transition-all duration-200 lg:hidden hover:text-gray-700"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  type="button"
+                  class="relative p-2 -m-2 text-gray-900 transition-all duration-200 hover:text-gray-700"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    />
+                  </svg>
+
+                  <span class="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-indigo-600 rounded-full">
+                    {" "}
+                    3{" "}
+                  </span>
+                </button>
+              </div>
+            </div>
           </div>
+        </div>
+      </header>
 
-          {/* CTA Buttons */}
-          <div className="flex gap-6 flex-wrap justify-center">
-            <button
-              onClick={() => navigate("/signup")}
-              className="bg-[#DA5444] hover:bg-[#c14435] text-white font-semibold py-3 px-8 rounded-xl text-lg shadow-md"
-            >
-              Sign Up
-            </button>
-            <button
-              onClick={() => navigate("/login")}
-              className="bg-[#412426] hover:bg-[#2f1a13] text-white font-semibold py-3 px-8 rounded-xl text-lg shadow-md"
-            >
-              Log In
-            </button>
+      <div class="relative py-12 overflow-hidden bg-gray-100 sm:py-16 lg:py-20 xl:py-24">
+        <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+          <div class="flex flex-col">
+            <div class="max-w-md mx-auto text-center xl:max-w-lg lg:mx-0 lg:text-left">
+              <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl lg:leading-tight xl:text-6xl">
+                Find Your Ideal Roommate with AI
+              </h1>
+              <p class="mt-5 text-lg font-medium text-gray-900 lg:mt-8">
+                RoomGenie intelligently matches you based on lifestyle, habits,
+                and personal preferences — not just age or location.
+              </p>
+
+              <div class="mt-8 lg:mt-10">
+                <a
+                  href="#"
+                  title=""
+                  class="inline-flex items-center justify-center px-8 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 font-pj hover:bg-gray-600"
+                  role="button"
+                >
+                  Find your perfect match
+                </a>
+              </div>
+
+              <div class="mt-8 lg:mt-12">
+                <svg
+                  class="w-auto h-4 mx-auto text-gray-300 lg:mx-0"
+                  viewBox="0 0 172 16"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 11 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 46 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 81 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 116 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 151 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 18 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 53 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 88 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 123 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 158 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 25 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 60 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 95 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 130 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 165 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 32 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 67 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 102 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 137 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 172 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 39 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 74 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 109 1)"
+                  ></line>
+                  <line
+                    y1="-0.5"
+                    x2="18.0278"
+                    y2="-0.5"
+                    transform="matrix(-0.5547 0.83205 0.83205 0.5547 144 1)"
+                  ></line>
+                </svg>
+              </div>
+
+              <div class="inline-grid grid-cols-2 mt-8 gap-x-8">
+                <div>
+                  <p class="text-4xl font-bold text-gray-900">50k+</p>
+                  <p class="mt-2 text-base font-medium text-gray-500">
+                    Omnidim
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-4xl font-bold text-gray-900">17k+</p>
+                  <p class="mt-2 text-base font-medium text-gray-500">
+                    Artists
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative mt-12 lg:mt-0 lg:absolute lg:-translate-y-1/2 lg:translate-x-1/2 lg:top-1/2">
+              <div class="relative w-full overflow-auto">
+                <div class="flex gap-8 flex-nowrap">
+                  <div class="flex-none w-full sm:w-2/3 lg:w-full lg:flex-1 whitespace-nowrap">
+                    <div class="overflow-hidden bg-white rounded shadow-xl">
+                      <div class="aspect-w-4 aspect-h-3">
+                        <img
+                          class="object-cover w-full h-full"
+                          src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/hero/2/artwork-1.png"
+                          alt=""
+                        />
+                      </div>
+                      <div class="p-8">
+                        <p class="text-lg font-bold text-gray-900">
+                          Ely-The Angry Girl
+                        </p>
+                        <p class="mt-6 text-xs font-medium tracking-widest text-gray-500 uppercase">
+                          Reserved Price
+                        </p>
+                        <div class="flex items-end mt-1">
+                          <p class="text-lg font-bold text-gray-900">
+                            2.00 ETH
+                          </p>
+                          <p class="ml-2 text-sm font-medium text-gray-500">
+                            ($9,394)
+                          </p>
+                        </div>
+                        <div class="grid grid-cols-2 mt-7 gap-x-4">
+                          <a
+                            href="#"
+                            title=""
+                            class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-white transition-all duration-200 bg-gray-900 border border-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
+                            role="button"
+                          >
+                            Place a bid
+                          </a>
+
+                          <a
+                            href="#"
+                            title=""
+                            class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-gray-900 transition-all duration-200 bg-transparent border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                            role="button"
+                          >
+                            View artwork
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex-none w-full sm:w-2/3 lg:w-full lg:flex-1 whitespace-nowrap">
+                    <div class="overflow-hidden bg-white rounded shadow-xl">
+                      <div class="aspect-w-4 aspect-h-3">
+                        <img
+                          class="object-cover w-full h-full"
+                          src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/hero/2/artwork-2.png"
+                          alt=""
+                        />
+                      </div>
+                      <div class="p-8">
+                        <p class="text-lg font-bold text-gray-900">
+                          Jenny-Retro Art
+                        </p>
+                        <p class="mt-6 text-xs font-medium tracking-widest text-gray-500 uppercase">
+                          Reserved Price
+                        </p>
+                        <div class="flex items-end mt-1">
+                          <p class="text-lg font-bold text-gray-900">
+                            1.67 ETH
+                          </p>
+                          <p class="ml-2 text-sm font-medium text-gray-500">
+                            ($7,627)
+                          </p>
+                        </div>
+                        <div class="grid grid-cols-2 mt-7 gap-x-4">
+                          <a
+                            href="#"
+                            title=""
+                            class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-white transition-all duration-200 bg-gray-900 border border-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
+                            role="button"
+                          >
+                            Place a bid
+                          </a>
+
+                          <a
+                            href="#"
+                            title=""
+                            class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-gray-900 transition-all duration-200 bg-transparent border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                            role="button"
+                          >
+                            View artwork
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex-none w-full sm:w-2/3 lg:w-full lg:flex-1 whitespace-nowrap">
+                    <div class="overflow-hidden bg-white rounded shadow-xl">
+                      <div class="aspect-w-4 aspect-h-3">
+                        <img
+                          class="object-cover w-full h-full"
+                          src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/hero/2/artwork-3.png"
+                          alt=""
+                        />
+                      </div>
+                      <div class="p-8">
+                        <p class="text-lg font-bold text-gray-900">
+                          Naila-The Angry Girl
+                        </p>
+                        <p class="mt-6 text-xs font-medium tracking-widest text-gray-500 uppercase">
+                          Reserved Price
+                        </p>
+                        <div class="flex items-end mt-1">
+                          <p class="text-lg font-bold text-gray-900">
+                            2.40 ETH
+                          </p>
+                        </div>
+                        <div class="grid grid-cols-2 mt-7 gap-x-4">
+                          <a
+                            href="#"
+                            title=""
+                            class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-white transition-all duration-200 bg-gray-900 border border-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
+                            role="button"
+                          >
+                            Place a bid
+                          </a>
+
+                          <a
+                            href="#"
+                            title=""
+                            class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-gray-900 transition-all duration-200 bg-transparent border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                            role="button"
+                          >
+                            View artwork
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
