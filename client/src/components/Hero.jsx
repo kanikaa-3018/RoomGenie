@@ -129,10 +129,11 @@ const Hero = () => {
           <div class="flex flex-col">
             <div class="max-w-md mx-auto text-center xl:max-w-lg lg:mx-0 lg:text-left">
               <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl lg:leading-tight xl:text-6xl">
-                Collect rare ✨ digital artworks
+                Find Your Ideal Roommate with AI
               </h1>
               <p class="mt-5 text-lg font-medium text-gray-900 lg:mt-8">
-                Buy & sell NFTs from world’s top artist
+                RoomGenie intelligently matches you based on lifestyle, habits,
+                and personal preferences — not just age or location.
               </p>
 
               <div class="mt-8 lg:mt-10">
@@ -142,7 +143,7 @@ const Hero = () => {
                   class="inline-flex items-center justify-center px-8 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 font-pj hover:bg-gray-600"
                   role="button"
                 >
-                  Explore all artwork
+                  Find your perfect match
                 </a>
               </div>
 
@@ -305,7 +306,7 @@ const Hero = () => {
                 <div>
                   <p class="text-4xl font-bold text-gray-900">50k+</p>
                   <p class="mt-2 text-base font-medium text-gray-500">
-                    Artwork
+                    Omnidim
                   </p>
                 </div>
 
