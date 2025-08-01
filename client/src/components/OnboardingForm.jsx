@@ -171,7 +171,7 @@ const OnboardingForm = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-softGray via-#E8A278/20 to-#212f45/20 py-12 px-4">
+    <div className="min-h-screen bg-[#F5F5F5] py-12 px-4 font-[Poppins]">
       <div className="max-w-2xl mx-auto">
         <motion.div
           className="text-center mb-12"
@@ -179,10 +179,10 @@ const OnboardingForm = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">
             Tell Us About Yourself
           </h1>
-          <p className="text-xl text-darkGray">
+          <p className="text-xl text-gray-700">
             Help us find your perfect roommate match
           </p>
         </motion.div>
@@ -193,14 +193,14 @@ const OnboardingForm = () => {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className={`flex items-center space-x-2 ₹{
-                  index <= currentStep ? "text-#008080" : "text-gray-400"
+                className={`flex items-center space-x-2 ${
+                  index <= currentStep ? "text-[#B38FB5]" : "text-gray-400"
                 }`}
               >
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ₹{
+                  className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
                     index <= currentStep
-                      ? "border-#008080 bg-#008080 text-white"
+                      ? "border-[#B38FB5] bg-[#B38FB5] text-white"
                       : "border-gray-300 text-gray-400"
                   }`}
                 >
@@ -212,25 +212,27 @@ const OnboardingForm = () => {
               </div>
             ))}
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-gray-300 rounded-full h-2">
             <div
               style={{
-                background: "linear-gradient(to right, #008080, #212f45)",
-                width: `₹{((currentStep + 1) / steps.length) * 100}%`,
+                background: "linear-gradient(to right, #B38FB5, #000000)",
+                width: `${((currentStep + 1) / steps.length) * 100}%`,
               }}
-              className=" h-2 rounded-full transition-all duration-500"
+              className="h-2 rounded-full transition-all duration-500"
             />
           </div>
         </div>
 
+        {/* Form Container */}
         <motion.div
-          className="bg-white rounded-3xl p-8 shadow-2xl border border-#008080/10"
+          className="bg-white rounded-3xl p-8 shadow-2xl border border-[#B38FB5]/10"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="space-y-8">
+              {/* Step 1 */}
               {currentStep === 0 && (
                 <motion.div
                   className="space-y-6"
@@ -238,7 +240,7 @@ const OnboardingForm = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  <h2 className="text-2xl font-bold text-black mb-6">
                     Personal Information
                   </h2>
                   {renderField("name", "Full Name", "text", User)}
@@ -246,6 +248,7 @@ const OnboardingForm = () => {
                 </motion.div>
               )}
 
+              {/* Step 2 */}
               {currentStep === 1 && (
                 <motion.div
                   className="space-y-6"
@@ -253,10 +256,12 @@ const OnboardingForm = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  <h2 className="text-2xl font-bold text-black mb-6">
                     Contact & Demographics
                   </h2>
                   {renderField("phone", "Phone Number", "tel", Phone)}
+
+                  {/* Age Input */}
                   <div className="mb-5">
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
@@ -270,13 +275,13 @@ const OnboardingForm = () => {
                           max: { value: 99, message: "Age too high" },
                         })}
                         placeholder="e.g., 21"
-                        className={`w-full pl-10 pr-4 py-2 border ₹{
+                        className={`w-full pl-10 pr-4 py-2 border ${
                           errors.age ? "border-red-500" : "border-gray-300"
-                        } rounded-lg shadow-sm focus:outline-none focus:ring-2 ₹{
+                        } rounded-lg shadow-sm focus:outline-none focus:ring-2 ${
                           errors.age
-                            ? "focus:ring-red-500 focus:border-red-500"
-                            : "focus:ring-teal-500 focus:border-teal-500"
-                        } text-gray-800 placeholder-gray-400`}
+                            ? "focus:ring-red-500"
+                            : "focus:ring-[#B38FB5]"
+                        } text-black placeholder-gray-400`}
                       />
                     </div>
                     {errors.age && (
@@ -288,6 +293,7 @@ const OnboardingForm = () => {
                 </motion.div>
               )}
 
+              {/* Step 3 */}
               {currentStep === 2 && (
                 <motion.div
                   className="space-y-6"
@@ -295,14 +301,15 @@ const OnboardingForm = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  <h2 className="text-2xl font-bold text-black mb-6">
                     Your Preferences
                   </h2>
+
                   <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-darkGray" />
+                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <select
                       {...register("budget")}
-                      className="w-full pl-10 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-#008080 focus:border-transparent transition-all text-lg appearance-none bg-white"
+                      className="w-full pl-10 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#B38FB5] text-lg bg-white"
                       disabled={submitting}
                     >
                       <option value="">Select Budget Range</option>
@@ -313,7 +320,7 @@ const OnboardingForm = () => {
                       <option value="₹2000+">₹2,000+</option>
                     </select>
                     {errors.budget && (
-                      <p className="text-contrast text-sm mt-2 ml-1">
+                      <p className="text-red-500 text-sm mt-2 ml-1">
                         {errors.budget.message}
                       </p>
                     )}
@@ -328,14 +335,15 @@ const OnboardingForm = () => {
               )}
             </div>
 
+            {/* Navigation Buttons */}
             <div className="flex justify-between items-center mt-12">
               <button
                 type="button"
                 onClick={prevStep}
-                className={`px-6 py-3 rounded-full font-semibold transition-all ₹{
+                className={`px-6 py-3 rounded-full font-semibold transition-all ${
                   currentStep === 0
                     ? "text-gray-400 cursor-not-allowed"
-                    : "text-darkGray hover:text-#008080 border border-gray-300 hover:border-#008080"
+                    : "text-gray-800 hover:text-[#B38FB5] border border-gray-300 hover:border-[#B38FB5]"
                 }`}
                 disabled={currentStep === 0 || submitting}
               >
@@ -346,10 +354,8 @@ const OnboardingForm = () => {
                 <motion.button
                   type="submit"
                   disabled={submitting}
-                  style={{
-                    background: "linear-gradient(to right, #008080, #212f45)",
-                  }}
-                  className=" text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 disabled:opacity-50"
+                  
+                  className="text-white bg-[#563f57] px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 disabled:opacity-50"
                   whileHover={{ scale: submitting ? 1 : 1.02 }}
                   whileTap={{ scale: submitting ? 1 : 0.98 }}
                 >
@@ -361,10 +367,8 @@ const OnboardingForm = () => {
                   type="button"
                   onClick={nextStep}
                   disabled={submitting}
-                  style={{
-                    background: "linear-gradient(to right, #008080, #212f45)",
-                  }}
-                  className="text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 disabled:opacity-50"
+                  
+                  className="text-white bg-[#563f57] px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 disabled:opacity-50"
                   whileHover={{ scale: submitting ? 1 : 1.02 }}
                   whileTap={{ scale: submitting ? 1 : 0.98 }}
                 >

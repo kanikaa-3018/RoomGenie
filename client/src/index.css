@@ -15,3 +15,7 @@
   --color-orange-hover: #c14435;
   --color-cocoa-hover: #2f1a13;
 }
+
+body {
+  @apply font-sans;
+}
