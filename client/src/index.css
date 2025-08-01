@@ -1,11 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Bitcount:wght@100..900&family=Playwrite+AU+SA+Guides&display=swap");
 @import "tailwindcss";
-
-@font-face {
-  font-family: "Virgil";
-  src: url("/assets/fonts/Virgil.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
 
 :root {
   --color-beige: #fceccd;

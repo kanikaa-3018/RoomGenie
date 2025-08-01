@@ -3,6 +3,14 @@ import { motion } from "framer-motion";
 
 export const BentoGrid = () => {
   return (
+<<<<<<< HEAD
+    <section className="mx-auto max-w-7xl px-4 py-12 text-slate-800">
+      <div className="mb-8 flex flex-col items-start justify-start gap-4 md:flex-row md:items-end">
+        <h2 className="max-w-lg text-4xl font-bold md:text-5xl">
+          Grow faster with our
+          <span className="text-slate-400"> all in one solution</span>
+        </h2>
+=======
     <section className="mx-auto max-w-7xl px-4 py-12 text-slate-800 font-[Poppins]">
       <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end md:px-8">
         <h2 className="w-1/2 text-3xl font-bold md:text-5xl leading-tight">
@@ -16,6 +24,7 @@ export const BentoGrid = () => {
         >
           Learn more
         </motion.button>
+>>>>>>> a3448e133b9001469a038cc1e1c08334ce341084
       </div>
 
       {/* Top Row */}

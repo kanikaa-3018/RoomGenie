@@ -8,22 +8,31 @@ const VerticalAccordion = () => {
   const [open, setOpen] = useState(items[0].id);
 
   return (
-    <section className="p-4 bg-[#d6bbd7] ">
-      <div className="flex flex-col lg:flex-row h-fit lg:h-[450px] w-full max-w-6xl mx-auto shadow overflow-hidden">
-        {items.map((item) => {
-          return (
-            <Panel
-              key={item.id}
-              open={open}
-              setOpen={setOpen}
-              id={item.id}
-              Icon={item.Icon}
-              title={item.title}
-              imgSrc={item.imgSrc}
-              description={item.description}
-            />
-          );
-        })}
+    <section className="p-4 bg-[#d6bbd7]">
+      <div className="mb-8 flex items-start justify-start gap-6 px-4 md:px-8">
+        <div className="flex flex-col lg:flex-row h-fit lg:h-[450px] w-full max-w-6xl mx-auto shadow overflow-hidden py-6 self-start">
+          {items.map((item) => {
+            return (
+              <Panel
+                key={item.id}
+                open={open}
+                setOpen={setOpen}
+                id={item.id}
+                Icon={item.Icon}
+                title={item.title}
+                imgSrc={item.imgSrc}
+                description={item.description}
+              />
+            );
+          })}
+        </div>
+        <div className="flex flex-col gap-3 justtify-around pt-2">
+          <h2 className="max-w-lg text-4xl font-bold md:text-7xl">MATCH.</h2>
+          <h2 className="max-w-lg text-4xl font-bold md:text-7xl text-[#563f57]">
+            CONNECT.
+          </h2>
+          <h2 className="max-w-lg text-4xl font-bold md:text-7xl">MOVE IN.</h2>
+        </div>
       </div>
     </section>
   );
