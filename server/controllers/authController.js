@@ -27,6 +27,7 @@ exports.loginUser = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ error: 'User not found' });
+    console.log(user)
 
     // Call FastAPI agent creation endpoint instead of spawning Python script
     const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
