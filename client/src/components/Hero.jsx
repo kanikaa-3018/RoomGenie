@@ -128,8 +128,20 @@ const Hero = () => {
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div class="flex flex-col">
             <div class="max-w-md mx-auto text-center xl:max-w-lg lg:mx-0 lg:text-left">
-              <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl lg:leading-tight xl:text-6xl">
-                Find Your Ideal Roommate with AI
+              <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl lg:leading-tight xl:text-4xl">
+                Meet Your Perfect Roommate
+              </h1>
+              <h1
+                class="text-3xl font-bold text-[#B38FB5] sm:text-4xl md:text-5xl lg:leading-tight xl:text-8xl"
+                style={{ fontFamily: "Bebas Neue, sans-serif" }}
+              >
+                In Minutes
+              </h1>
+              <h1
+                class="text-3xl font-bold text-[#563f57] sm:text-4xl md:text-5xl lg:leading-tight xl:text-8xl"
+                style={{ fontFamily: "Bebas Neue, sans-serif" }}
+              >
+                Not months
               </h1>
               <p class="mt-5 text-lg font-medium text-gray-900 lg:mt-8">
                 RoomGenie intelligently matches you based on lifestyle, habits,
