@@ -10,6 +10,7 @@ const ScoreSlider = ({ value, onChange, label }) => {
         </span>
         <span className="text-sm font-bold text-primary">{value}%</span>
       </div>
+
       <div className="relative">
         <input
           type="range"
@@ -17,17 +18,19 @@ const ScoreSlider = ({ value, onChange, label }) => {
           max="100"
           value={value}
           onChange={(e) => onChange(parseInt(e.target.value))}
-          className="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer slider"
+          className="w-full h-3 appearance-none rounded-full cursor-pointer slider"
           style={{
-            background: `linear-gradient(to right, #E9D5FF 0%, #4C1D95 ${value}%, #e5e7eb ${value}%, #e5e7eb 100%)`,
+            background: `linear-gradient(to right, #a0522d 0%, #8b4513 ${value}%, #e5e7eb ${value}%, #e5e7eb 100%)`,
           }}
         />
+
         <motion.div
-          className="absolute top-1/2 transform -translate-y-1/2 w-6 h-6 bg-white border-2 border-primary rounded-full shadow-lg pointer-events-none"
-          style={{ left: `calc(${value}% - 12px)` }}
+          className="absolute top-1/2 transform -translate-y-1/2 w-5 h-5 bg-[#8b4513] border-2 border-white rounded-full shadow-md pointer-events-none"
+          style={{ left: `calc(${value}% - 10px)` }}
           whileHover={{ scale: 1.2 }}
         />
       </div>
+
       <div className="flex justify-between text-xs text-darkGray">
         <span>Low</span>
         <span>High</span>

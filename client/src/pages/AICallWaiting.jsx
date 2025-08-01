@@ -9,7 +9,7 @@ const AICallWaiting = () => {
   const navigate = useNavigate();
 
   const messages = [
-    "Connecting you with RoomMuse AI...",
+    "Connecting you with RoomGenie AI...",
     "Analyzing your preferences...",
     "Preparing personalized questions...",
     "Ready to chat!"
@@ -102,7 +102,7 @@ const AICallWaiting = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          RoomMuse AI is Calling
+          RoomGenie AI is Calling
         </motion.h1>
 
         <motion.div

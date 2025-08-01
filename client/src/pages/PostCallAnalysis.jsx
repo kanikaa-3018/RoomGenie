@@ -34,10 +34,10 @@ const PostCallAnalysis = () => {
 
 const handleContinue = async () => {
   try {
-    await axios.post(`/api/users/${user._id}/post-call-analysis`, {
-      scores,
-      preferences: preferences.trim() || undefined,
-    });
+    // await axios.post(`/api/users/${user._id}/post-call-analysis`, {
+    //   scores,
+    //   preferences: preferences.trim() || undefined,
+    // });
     navigate("/compatibility");
   } catch (err) {
     console.error("Failed to update user post-call data", err);
@@ -129,7 +129,9 @@ const handleContinue = async () => {
               </h3>
               <motion.button
                 onClick={() => setIsEditing(true)}
-                className="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 mx-auto"
+                className=" text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 mx-auto" style={{
+                    background: "linear-gradient(to right, #008080, #212f45)",
+                  }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -180,7 +182,7 @@ const handleContinue = async () => {
               </button>
               <motion.button
                 onClick={() => setIsEditing(false)}
-                className="bg-gradient-to-r from-accent to-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2"
+                className="bg-gradient-to-r from-accent to-primary text-black px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -191,7 +193,9 @@ const handleContinue = async () => {
           ) : (
             <motion.button
               onClick={handleContinue}
-              className="bg-gradient-to-r from-primary to-accent text-white px-12 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all flex items-center space-x-2 mx-auto"
+              className=" text-white px-12 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all flex items-center space-x-2 mx-auto" style={{
+                    background: "linear-gradient(to right, #008080, #212f45)",
+                  }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
