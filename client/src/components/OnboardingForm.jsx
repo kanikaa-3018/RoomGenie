@@ -362,7 +362,7 @@ const OnboardingForm = () => {
                   onClick={nextStep}
                   disabled={submitting}
                   style={{
-                    background: "linear-gradient(to right, #008080, #212f45)",
+                    background: "#",
                   }}
                   className="text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 disabled:opacity-50"
                   whileHover={{ scale: submitting ? 1 : 1.02 }}
