@@ -14,12 +14,12 @@ const Hero = () => {
           <div class="flex items-center justify-between h-16 lg:h-[72px]">
             <div class="flex items-center flex-shrink-0">
               <a href="#" title="" class="inline-flex">
-                <span class="sr-only"> Rareblocks logo </span>
-                <img
+                <span class="sr-only"> Room Genie </span>
+                {/* <img
                   class="w-auto h-8"
                   src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/logo.svg"
                   alt=""
-                />
+                /> */}
               </a>
             </div>
 

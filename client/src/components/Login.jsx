@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -25,10 +26,7 @@ export default function LoginPage() {
         return;
       }
 
-      // Optionally store user data in localStorage
       localStorage.setItem('user', JSON.stringify(data.user));
-
-      // Redirect to /ai-call
       navigate('/ai-call');
     } catch (err) {
       setError('Something went wrong');
@@ -37,12 +35,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center text-teal-600">Login</h2>
-        <form onSubmit={handleLogin} className="space-y-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5] font-poppins">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md"
+      >
+        <h2 className="text-3xl font-bold mb-6 text-center text-[#B38FB5]">Welcome to RoomGenie</h2>
+        <p className="text-center text-gray-600 mb-4 text-sm">
+          Your personalized roommate recommender
+        </p>
+
+        <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
               Email Address
             </label>
             <input
@@ -52,23 +59,21 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B38FB5]"
             />
           </div>
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <button
-          style={{
-                    background: "linear-gradient(to right, #008080, #212f45)",
-                  }}
             type="submit"
-            className="w-full  text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+            className="w-full text-white bg-[#563f57] font-semibold py-2 px-4 rounded-lg transition duration-200"
+            
           >
             Continue
           </button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
