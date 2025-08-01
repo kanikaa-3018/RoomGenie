@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { handleOmnidimWebhook,checkCallStatusById, getPostCallAnalysis  } = require('../controllers/userController');
+const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 
-router.post('/omnidim-data', handleOmnidimWebhook);
-router.get('/:userId/call-status', checkCallStatusById);
-router.get('/:id/post-call-analysis', getPostCallAnalysis )
+router.post('/register', authController.registerUser);
+router.post('/login', userController.loginUser);
+router.post('/omnidim-data', userController.handleOmnidimWebhook);
+router.get('/analysis/:email', userController.getUserAnalysis);
+router.post('/update-vector', userController.updateVector);
 
 module.exports = router;

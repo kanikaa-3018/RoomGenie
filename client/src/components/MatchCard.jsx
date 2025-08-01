@@ -1,129 +1,86 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { Heart, MapPin, DollarSign, User, MessageCircle } from "lucide-react";
+import { CheckCircle, Heart, Info } from "lucide-react";
+import React, { useState } from "react";
+import MatchDetailModal from "./MatchDetailModal";
 
 const MatchCard = ({ match, onShortlist, isShortlisted }) => {
-  const traitNames = {
-    cleanliness: "Cleanliness",
-    sociability: "Sociability",
-    conflictTolerance: "Conflict Resolution",
-    lifestyle: "Lifestyle",
-    communication: "Communication",
-  };
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <motion.div
-      className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-primary/10"
-      whileHover={{ y: -5 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Header with Image and Basic Info */}
-      <div className="relative">
-        <img
-          src={match.image}
-          alt={match.name}
-          className="w-full h-64 object-cover"
-        />
-        <div className="absolute top-4 right-4">
-          <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
-            <span className="text-primary font-bold text-lg">
-              {match.compatibility}%
-            </span>
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-          <h3 className="text-2xl font-bold text-white mb-1">{match.name}</h3>
-          <div className="flex items-center text-white/90 space-x-4">
-            <div className="flex items-center space-x-1">
-              <User className="h-4 w-4" />
-              <span>{match.age}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <MapPin className="h-4 w-4" />
-              <span>{match.location}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <DollarSign className="h-4 w-4" />
-              <span>{match.budget}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
-        {/* Compatibility Breakdown */}
-        <div className="mb-6">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">
-            Compatibility Breakdown
-          </h4>
-          <div className="space-y-3">
-            {Object.entries(match.scores).map(([trait, score]) => (
-              <div key={trait} className="flex items-center justify-between">
-                <span className="text-sm font-medium text-darkGray">
-                  {traitNames[trait]}
-                </span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-20 bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-gradient-to-r from-primary to-accent h-2 rounded-full"
-                      style={{ width: `${score}%` }}
-                    />
-                  </div>
-                  <span className="text-sm font-bold text-primary w-8">
-                    {score}%
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* AI Summary */}
-        <div className="mb-6">
-          <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-            <MessageCircle className="h-5 w-5 text-accent mr-2" />
-            Why She's Perfect for You
-          </h4>
-          <p className="text-darkGray leading-relaxed text-sm bg-accent/10 p-4 rounded-2xl">
-            {match.summary}
+    <>
+      <motion.div
+        whileHover="hover"
+        transition={{ duration: 1, ease: "backInOut" }}
+        variants={{ hover: { scale: 1.05 } }}
+        className="relative h-auto w-full overflow-hidden rounded-2xl bg-[#F6E1C3] p-6 text-neutral-900 shadow-xl"
+      >
+        <div className="relative z-10 space-y-4 text-center">
+          <img
+            src={match.image}
+            alt={match.name}
+            className="w-20 h-20 mx-auto rounded-full object-cover"
+          />
+          <h2 className="text-xl font-bold text-black">{match.name}</h2>
+          <p className="text-lg text-gray-800 font-medium">
+            {match.compatibility}% Compatibility
           </p>
-        </div>
 
-        {/* Interests */}
-        <div className="mb-6">
-          <h4 className="text-lg font-semibold text-gray-900 mb-3">Interests</h4>
-          <div className="flex flex-wrap gap-2">
-            {match.interests.map((interest, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 bg-secondary/30 text-contrast text-sm rounded-full"
-              >
-                {interest}
-              </span>
-            ))}
+          <div className="flex justify-center gap-4 mt-4">
+            <button
+              onClick={() => setShowModal(true)}
+              className="text-sm bg-white border border-black rounded-full px-4 py-2 flex items-center gap-1 hover:bg-accent hover:text-white"
+            >
+              <Info className="w-4 h-4" />
+              Read More
+            </button>
+            <button
+              onClick={() => onShortlist(match)}
+              className={`text-sm border-2 rounded-full px-4 py-2 flex items-center gap-1 font-semibold ${
+                isShortlisted
+                  ? "bg-[#E69A8D] border-[#E69A8D] text-white"
+                  : "bg-white border-black text-black hover:bg-[#F6E1C3]"
+              }`}
+            >
+              {isShortlisted ? <CheckCircle className="w-4 h-4" /> : <Heart className="w-4 h-4" />}
+              {isShortlisted ? "Shortlisted" : "Shortlist"}
+            </button>
           </div>
         </div>
+        <Background />
+      </motion.div>
 
-        {/* Action Button */}
-        <motion.button
-          onClick={() => onShortlist(match)}
-          className={`w-full py-3 rounded-2xl font-semibold transition-all flex items-center justify-center space-x-2 ${
-            isShortlisted
-              ? "bg-accent text-black shadow-lg"
-              : "bg-gradient-to-r from-primary to-accent text-brown-400 hover:shadow-lg"
-          }`}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <Heart className={`h-5 w-5 ${isShortlisted ? "fill-current" : ""}`} />
-          <span>{isShortlisted ? "Shortlisted!" : "Add to Shortlist"}</span>
-        </motion.button>
-      </div>
-    </motion.div>
+      {showModal && <MatchDetailModal match={match} onClose={() => setShowModal(false)} />}
+    </>
   );
 };
+
+const Background = () => (
+  <motion.svg
+    width="320"
+    height="384"
+    viewBox="0 0 320 384"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="absolute inset-0 z-0"
+    variants={{ hover: { scale: 1.3 } }}
+    transition={{ duration: 1, ease: "backInOut" }}
+  >
+    <motion.circle
+      cx="160.5"
+      cy="114.5"
+      r="101.5"
+      fill="#FFECD1"
+      transition={{ duration: 1, delay: 0.2 }}
+    />
+    <motion.ellipse
+      cx="160.5"
+      cy="265.5"
+      rx="101.5"
+      ry="43.5"
+      fill="#F6E1C3"
+      transition={{ duration: 1, delay: 0.2 }}
+    />
+  </motion.svg>
+);
 
 export default MatchCard;

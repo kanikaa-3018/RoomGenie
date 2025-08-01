@@ -38,15 +38,15 @@ const MatchResults = () => {
     );
 
     try {
-    //   const res = await fetch(`/api/user/${user._id}/shortlist`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ shortlisted: shortlistedMatches }),
-    //   });
+      const res = await fetch(`/api/user/${user._id}/shortlist`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ shortlisted: shortlistedMatches }),
+      });
 
-    //   if (!res.ok) throw new Error("Shortlist update failed");
+      if (!res.ok) throw new Error("Shortlist update failed");
 
       toast.success(
         "Shortlist submitted! Our team will review and assign your roommate."

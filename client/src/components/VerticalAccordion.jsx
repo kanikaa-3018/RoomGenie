@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useWindowSize } from "./useWindowSize";
 import { useState } from "react";
 import React from "react";
-
+import long1 from "../../public/assets/images/long1.jpg";
 const VerticalAccordion = () => {
   const [open, setOpen] = useState(items[0].id);
 
@@ -134,8 +134,8 @@ const items = [
     id: 1,
     title: "Set Preferences",
     Icon: FiDollarSign,
-    imgSrc:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1740&q=80",
+    imgSrc: long1
+      ,
     description:
       "Tell us about your lifestyle, habits, sleep schedule, cleanliness level, and other living preferences. We don’t match based on age or location — just real compatibility.",
   },
