@@ -4,6 +4,7 @@ import StepsSection from "../components/StepsSection";
 import  BentoGrid  from "../ui/BentoGrid";
 import VerticalAccordion from "../components/VerticalAccordion";
 import Footer from "../ui/Footer";
+import Testimonials from "../components/Testimonials";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Hero />
       <VerticalAccordion />
       <BentoGrid />
+      <Testimonials />
       <Footer />
     </div>
   );

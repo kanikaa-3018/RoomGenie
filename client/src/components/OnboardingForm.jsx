@@ -354,7 +354,6 @@ const OnboardingForm = () => {
                 <motion.button
                   type="submit"
                   disabled={submitting}
-                  
                   className="text-white bg-[#563f57] px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2 disabled:opacity-50"
                   whileHover={{ scale: submitting ? 1 : 1.02 }}
                   whileTap={{ scale: submitting ? 1 : 0.98 }}
