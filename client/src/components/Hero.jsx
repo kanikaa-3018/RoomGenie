@@ -47,9 +47,10 @@ const Hero = () => {
         </div>
 
         {/* CTA Flex */}
+        {/* CTA Flex */}
         <div className="flex gap-6 flex-wrap justify-center">
           <button
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/onboarding")}
             className="bg-[#DA5444] hover:bg-[#c14435] text-white font-semibold py-3 px-8 rounded-xl text-lg shadow-md"
           >
             Sign Up
