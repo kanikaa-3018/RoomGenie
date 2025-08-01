@@ -102,49 +102,50 @@ const OnboardingForm = () => {
   };
 
   const onSubmit = async (data) => {
-  if (submitting) return;
-  setSubmitting(true);
+    if (submitting) return;
+    setSubmitting(true);
 
-  // Format the phone number
-  let formattedPhone = data?.phone?.trim();
-  if (!formattedPhone.startsWith("+91")) {
-    formattedPhone = "+91" + formattedPhone.replace(/^0+/, "").replace(/\D/g, "");
-  }
-
-  const payload = { ...data, phone: formattedPhone };
-
-  try {
-    const response = await fetch(
-      "https://c3fa96c76aba.ngrok-free.app/api/auth/register",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }
-    );
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result?.error || "Registration failed");
+    // Format the phone number
+    let formattedPhone = data?.phone?.trim();
+    if (!formattedPhone.startsWith("+91")) {
+      formattedPhone =
+        "+91" + formattedPhone.replace(/^0+/, "").replace(/\D/g, "");
     }
 
-    toast.success("Profile created successfully!");
+    const payload = { ...data, phone: formattedPhone };
 
-    timeoutRef.current = window.setTimeout(() => {
-      if (!isMountedRef.current) return;
-      toast.success("Our AI assistant will call you soon! 💬", {
-        duration: 3000,
-      });
-      navigate("/");
-    }, 1000);
-  } catch (error) {
-    console.error("submit error:", error);
-    toast.error("Something went wrong. Please try again.");
-  } finally {
-    if (isMountedRef.current) setSubmitting(false);
-  }
-};
+    try {
+      const response = await fetch(
+        "https://c3fa96c76aba.ngrok-free.app/api/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Registration failed");
+      }
+
+      toast.success("Profile created successfully!");
+
+      timeoutRef.current = window.setTimeout(() => {
+        if (!isMountedRef.current) return;
+        toast.success("Our AI assistant will call you soon! 💬", {
+          duration: 3000,
+        });
+        navigate("/");
+      }, 1000);
+    } catch (error) {
+      console.error("submit error:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      if (isMountedRef.current) setSubmitting(false);
+    }
+  };
 
   const renderField = (
     fieldName,
@@ -257,7 +258,6 @@ const OnboardingForm = () => {
                   </h2>
                   {renderField("phone", "Phone Number", "tel", Phone)}
                   <div className="mb-5">
-                
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
                       <input
