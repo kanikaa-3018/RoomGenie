@@ -7,6 +7,8 @@ import OnboardingForm from "./components/OnboardingForm.jsx";
 import LoginPage from "./components/Login.jsx";
 import AICallWaiting from "./pages/AICallWaiting.jsx";
 import PostCallAnalysis from "./pages/PostCallAnalysis.jsx";
+import CompatibilityProcessing from "./components/CompatibilityProcessing.jsx";
+import MatchResults from "./pages/MatchResults.jsx";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/ai-call" element={<AICallWaiting />} />
         <Route path="/post-call" element={<PostCallAnalysis />} />
+        <Route path="/compatibility" element={<CompatibilityProcessing />} />
+        <Route path="/results" element={<MatchResults />} />
         <Route path="/events" element={<Home />} />
         <Route path="/sponsors" element={<Home />} />
         <Route path="/gallery" element={<Home />} />
