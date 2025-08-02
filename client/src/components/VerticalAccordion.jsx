@@ -4,6 +4,9 @@ import { useWindowSize } from "./useWindowSize";
 import { useState } from "react";
 import React from "react";
 import long1 from "../../public/assets/images/long1.jpg";
+import long2 from "../../public/assets/images/long2.jpg";
+import long3 from "../../public/assets/images/long3.jpg";
+import long4 from "../../public/assets/images/long4.png";
 const VerticalAccordion = () => {
   const [open, setOpen] = useState(items[0].id);
 
@@ -134,7 +137,7 @@ const items = [
     id: 1,
     title: "Set Preferences",
     Icon: FiDollarSign,
-    imgSrc: long1
+    imgSrc: long3
       ,
     description:
       "Tell us about your lifestyle, habits, sleep schedule, cleanliness level, and other living preferences. We don’t match based on age or location — just real compatibility.",
@@ -144,7 +147,7 @@ const items = [
     title: "Smart Matching",
     Icon: FiPlay,
     imgSrc:
-      "https://images.unsplash.com/photo-1592841317073-897c02d4c93d?auto=format&fit=crop&w=1740&q=80",
+      long2,
     description:
       "Our AI compares your preferences with others to suggest roommates who complement your lifestyle and personality — think of it like a dating app, but for roommates.",
   },
@@ -153,7 +156,7 @@ const items = [
     title: "Explore Profiles",
     Icon: FiBell,
     imgSrc:
-      "https://images.unsplash.com/photo-1600585154084-5c4c905cdb07?auto=format&fit=crop&w=1740&q=80",
+      long4,
     description:
       "Browse through recommended profiles with key info on compatibility — no endless swiping. Just clean, meaningful details to help you decide quickly.",
   },
@@ -162,7 +165,7 @@ const items = [
     title: "Connect & Chat",
     Icon: FiBarChart,
     imgSrc:
-      "https://images.unsplash.com/photo-1589927986089-35812386b1bb?auto=format&fit=crop&w=1740&q=80",
+      long1,
     description:
       "Once you like a match, start chatting securely to break the ice. RoomGenie makes sure both sides are comfortable and aligned before moving in.",
   },

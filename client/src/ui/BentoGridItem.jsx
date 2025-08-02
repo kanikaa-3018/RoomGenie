@@ -10,18 +10,22 @@ export const BentoGridItem = ({
 }) => {
   return (
     <div
-      className={`relative rounded-xl group/bento hover:shadow-xl transition duration-200 border p-4 bg-white dark:bg-black dark:border-white/[0.2] ${className}`}
+      className={`relative rounded-2xl group/bento border p-5 shadow-sm bg-white dark:bg-neutral-900 dark:border-neutral-700 transition duration-200 hover:shadow-md ${className}`}
     >
-      <div className="absolute right-3 top-3 text-neutral-500 dark:text-neutral-400">
-        {icon}
-      </div>
-      <div className="flex flex-col justify-between h-full w-full">
-        <div className="font-sans text-neutral-600 dark:text-neutral-300 font-bold text-lg">
-          {title}
+      <div className="flex flex-col h-full justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+            {icon}
+          </div>
+          <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100">
+            {title}
+          </h3>
         </div>
-        <div className="font-sans text-neutral-600 dark:text-neutral-400 text-sm mt-2">
+
+        <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
           {description}
-        </div>
+        </p>
+
         <div className="mt-4">{header}</div>
       </div>
     </div>
