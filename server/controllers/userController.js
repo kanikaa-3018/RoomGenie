@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const Match = require('../models/Match.js');
 let activeOmnidimUserEmail = null;
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
@@ -192,5 +193,70 @@ exports.getPostCallAnalysis = async (req, res) => {
   } catch (error) {
     console.error('Error fetching post-call analysis:', error);
     res.status(500).json({ error: 'Server Error' });
+  }
+};
+
+// Submit match request to admin
+exports.submitMatch = async (req, res) => {
+  try {
+    const { user1Id, user2Id, compatibilityScore } = req.body;
+
+    // Validate input
+    if (!user1Id || !user2Id) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Both user1Id and user2Id are required for a match' 
+      });
+    }
+
+    if (!compatibilityScore || compatibilityScore < 0 || compatibilityScore > 100) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Valid compatibility score (0-100) is required' 
+      });
+    }
+
+    // Fetch user details
+    const [user1, user2] = await Promise.all([
+      User.findById(user1Id).select('name email'),
+      User.findById(user2Id).select('name email')
+    ]);
+    
+    if (!user1 || !user2) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'One or both users not found' 
+      });
+    }
+
+    // Create match request
+    const match = new Match({
+      user1: {
+        userId: user1._id,
+        name: user1.name,
+        email: user1.email
+      },
+      user2: {
+        userId: user2._id,
+        name: user2.name,
+        email: user2.email
+      },
+      compatibilityScore,
+      status: 'pending'
+    });
+
+    await match.save();
+
+    res.status(201).json({
+      success: true,
+      message: 'Match request submitted to admin successfully',
+      matchId: match._id
+    });
+  } catch (error) {
+    console.error('Error submitting match:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to submit match request' 
+    });
   }
 };
