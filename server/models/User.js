@@ -1,43 +1,37 @@
 const mongoose = require('mongoose');
 
-const allowedTraits = {
-  '16-18': ['sleepDiscipline', 'cleanliness', 'studyStyle', 'emotionalSupport', 'streamAffinity'],
-  '18-25': ['cleanliness', 'noiseTolerance', 'guestComfort', 'itemSharing', 'emotionalSharing'],
-  '25+': ['socialPreference', 'scheduleTolerance', 'partyOpenness', 'cleanliness', 'workLifeRespect'],
-};
-
-const traitSubSchema = new mongoose.Schema({
-  score: {
-    type: Number,
-    required: true,
-    min: 0,
-    max: 10,
-  },
-  
-}, { _id: false });
-
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   email: { type: String, required: true, unique: true, lowercase: true, trim: true },
   phone: { type: String, trim: true },
   age: { type: Number, required: true, min: 16 },
   ageGroup: { type: String, enum: ['16-18', '18-25', '25+'], required: true },
-  compatibilityVector: [Number],
-  location: { type: String },
-  budget: { type: String },
 
-  traits: {
-    type: Map,
-    of: traitSubSchema,
-    default: {},
+  // Single array to store vector scores (e.g., personality or compatibility scores)
+  vector_embedding: {
+    type: [Number],
     required: true,
+    validate: {
+      validator: function(arr) {
+        return arr.every(score => Number.isInteger(score) && score >= 0 && score <= 100);
+      },
+      message: 'Each score in vector_embedding must be an integer between 0 and 100.'
+    }
   },
 
+  location: { type: String },
+  budget: { type: String },
+  questionAnswered: { type: Number, default: 0 },
+
+  // Analysis Fields
   sentiment: String,
   personalitySummary: String,
+
+  // Voice Call Data
   callRecordingUrl: String,
   callId: Number,
 
+  // Conversation logs
   interactions: [{
     sequence: Number,
     user_query: String,
@@ -46,25 +40,6 @@ const userSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
-userSchema.pre('save', function (next) {
-  if (!this.ageGroup) return next(new Error('ageGroup is required'));
-
-  const validTraits = allowedTraits[this.ageGroup];
-  const traitsKeys = Array.from(this.traits.keys());
-  const invalidTraits = traitsKeys.filter(t => !validTraits.includes(t));
-  if (invalidTraits.length)
-    return next(new Error(`Invalid traits for age group ${this.ageGroup}: ${invalidTraits.join(', ')}`));
-
-  for (const [key, traitObj] of this.traits.entries()) {
-    if (typeof traitObj.score !== 'number' || traitObj.score < 0 || traitObj.score > 10) {
-      return next(new Error(`Trait score for "${key}" must be a number between 0 and 10`));
-    }
-    if (!Array.isArray(traitObj.embedding) || traitObj.embedding.some(val => typeof val !== 'number')) {
-      return next(new Error(`Trait embedding for "${key}" must be an array of numbers`));
-    }
-  }
-
-  next();
-});
+// No need for pre-save trait validation anymore
 
 module.exports = mongoose.model('User', userSchema);

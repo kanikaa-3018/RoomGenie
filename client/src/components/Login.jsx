@@ -13,7 +13,7 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const res = await fetch('https://c3fa96c76aba.ngrok-free.app/api/users/login', {
+      const res = await fetch('https://354300db352d.ngrok-free.app/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

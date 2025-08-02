@@ -22,88 +22,88 @@ import ScoreSlider from "../components/ScoreSlider";
 const COLORS = ["#B38FB5", "#8E6F97", "#d3bddb", "#563F57", "#A77BA0"];
 
 const PostCallAnalysis = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [preferences, setPreferences] = useState("");
   const [showChart, setShowChart] = useState(false);
+
+  const [isEditing, setIsEditing] = useState(false);
   const [summary, setSummary] = useState("");
   const [sentiment, setSentiment] = useState("");
-  const [scores, setScores] = useState([ 60,50,45,30,22]
-   
-  );
-
+  const [scores, setScores] = useState([60, 50, 45, 30, 22]);
   const user = JSON.parse(localStorage.getItem("user") || "null");
   const navigate = useNavigate();
 
-const labelMap = [
-  "Cleanliness",
-  "Sociability",
-  "Conflict Tolerance",
-  "Lifestyle",
-  "Communication",
-];
+  const traitDescriptions = [
+    "How important is tidiness and organization in your living space?",
+    "Your preference for social interaction with roommates.",
+    "How you handle disagreements and resolve conflicts.",
+    "Your daily routines, sleep schedule, and general habits.",
+    "How openly and frequently you communicate with others.",
+  ];
 
-const traitDescriptions = [
-  "How important is tidiness and organization in your living space",
-  "Your preference for social interaction with roommates",
-  "How you handle disagreements and resolve conflicts",
-  "Your daily routines, sleep schedule, and general habits",
-  "How openly and frequently you communicate with others",
-];
+  const labelMap = [
+    "Cleanliness",
+    "Sociability",
+    "Conflict Tolerance",
+    "Lifestyle",
+    "Communication",
+  ];
 
-
-  const chartData = Object.entries(scores).map(([name, value]) => ({
-    name: labelMap[name] || name,
+  const chartData = scores.map((value, index) => ({
+    name: labelMap[index],
     value,
   }));
 
-  const handleScoreChange = (trait, value) => {
-    setScores((prev) => ({ ...prev, [trait]: value }));
+  const fetchSummary = async () => {
+    try {
+      const res = await axios.get(
+        `https://354300db352d.ngrok-free.app/api/users/analysis/${user?.email}`
+      );
+
+      const dataRes = res.data;
+      console.log("Fetched summary data:", dataRes);
+
+      setSummary(dataRes.summary || "No summary available.");
+      setSentiment(dataRes.sentiment || "Neutral");
+      setScores(dataRes.vector_embeddings || [30, 30, 30, 30, 30]);
+    } catch (err) {
+      console.error("Failed to fetch summary", err);
+    }
   };
 
-const fetchSummary = async () => {
-  try {
-    const res = await axios.get(
-      `https://c3fa96c76aba.ngrok-free.app/api/users/analysis/${user?.email}`
-    );
-    const data = res.data;
+  const handleSave = async () => {
+    try {
+      // Save vector scores
+      await axios.post(
+        `https://c3fa96c76aba.ngrok-free.app/api/users/update-vector`,
+        {
+          email: user?.email,
+          vector: scores,
+        }
+      );
 
-    setSummary(data.summary || "No summary available.");
-    setSentiment(data.sentiment || "Neutral");
-
-    const traits = data.traits || {};
-
-    // Convert trait map to ordered array
-    const updatedScores = [
-      traits.question1 || 30,
-      traits.question2 || 30,
-      traits.question3 || 30,
-      traits.question4 || 30,
-      traits.question5 || 30,
-    ];
-
-    setScores(updatedScores);
-  } catch (err) {
-    console.error("Failed to fetch summary", err);
-  }
-};
-
-
-const handleSave = async () => {
-  try {
-    await axios.post(
-      `https://c3fa96c76aba.ngrok-free.app/api/users/update-vector`,
-      {
-        email: user?.email,
-        vector: scores,
+      // Try to fetch summary — but don't fail if this breaks
+      try {
+        await fetchSummary();
+      } catch (summaryError) {
+        console.warn("Vector saved, but summary fetch failed:", summaryError);
       }
-    );
-    await fetchSummary();
-    setIsEditing(false);
-  } catch (err) {
-    console.error("Failed to save compatibility vector", err);
-  }
-};
 
+      setIsEditing(false);
+    } catch (err) {
+      console.error("❌ Failed to save compatibility vector:", err);
+    }
+  };
+
+  const handleScoreChange = (index, value) => {
+    const updated = [...scores];
+    updated[index] = value;
+    setScores(updated);
+  };
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchSummary();
+    }
+  }, [user?.email]);
 
   const handleContinue = () => {
     navigate("/compatibility");
@@ -194,9 +194,9 @@ const handleSave = async () => {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <div className="grid md:grid-cols-2 gap-8">
-                {Object.entries(scores).map(([trait, score], index) => (
+                {scores.map((score, index) => (
                   <motion.div
-                    key={trait}
+                    key={index}
                     className="space-y-3"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -204,20 +204,21 @@ const handleSave = async () => {
                   >
                     <div className="flex items-center justify-between">
                       <h3 className="text-lg font-semibold capitalize text-[#563F57]">
-                        {labelMap[trait]}
+                        {labelMap[index]}
                       </h3>
                       <span className="text-xl font-bold text-[#B38FB5]">
                         {score}%
                       </span>
                     </div>
                     <p className="text-sm text-gray-500">
-                      {traitDescriptions[trait]}
+                      {traitDescriptions[index]}
                     </p>
+
                     {isEditing ? (
                       <ScoreSlider
                         value={score}
-                        onChange={(value) => handleScoreChange(trait, value)}
-                        label={trait}
+                        onChange={(value) => handleScoreChange(index, value)}
+                        label={labelMap[index]}
                       />
                     ) : (
                       <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
@@ -274,7 +275,7 @@ const handleSave = async () => {
               </div>
             )}
 
-            {isEditing && (
+            {/* {isEditing && (
               <motion.div
                 className="bg-white rounded-3xl p-10 shadow-xl border border-[#B38FB510] mb-10"
                 initial={{ opacity: 0, y: 20 }}
@@ -294,7 +295,7 @@ const handleSave = async () => {
                   This will help us refine your match even further (optional)
                 </p>
               </motion.div>
-            )}
+            )} */}
           </>
         )}
 

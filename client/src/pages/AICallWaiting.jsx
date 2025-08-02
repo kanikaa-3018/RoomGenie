@@ -24,7 +24,7 @@ const AICallWaiting = () => {
 
     const checkCallStatus = async () => {
       try {
-        const res = await fetch(`https://c3fa96c76aba.ngrok-free.app/api/users/${user._id}/call-status`);
+        const res = await fetch(`https://354300db352d.ngrok-free.app/api/users/${user._id}/call-status`);
         const data = await res.json();
         if (res.ok && data.callStatus) {
           navigate('/post-call');
