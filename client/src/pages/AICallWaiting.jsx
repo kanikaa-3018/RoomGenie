@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const AICallWaiting = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
-  const [statusChecked, setStatusChecked] = useState(false);
+  const [questionCount, setQuestionCount] = useState(0);
+  const [triggeredRedirect, setTriggeredRedirect] = useState(false);
   const navigate = useNavigate();
 
   const messages = [
@@ -22,44 +23,39 @@ const AICallWaiting = () => {
       return;
     }
 
-    const checkCallStatus = async () => {
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user._id}/call-status`);
-        const data = await res.json();
-        if (res.ok && data.callStatus) {
-          navigate('/post-call');
-        } else {
-          setStatusChecked(true);
-        }
-      } catch (error) {
-        console.error('Error checking call status:', error);
-        setStatusChecked(true);
-      }
-    };
+    const pollCallStatus = async () => {
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/omnidim-data`);
+    const data = await res.json();
 
-    checkCallStatus();
+    // Access nested value safely
+    const numQues = parseInt(data?.call_report?.extracted_variables?.number_of_ques || "0");
 
-    const interval = setInterval(() => {
+    setQuestionCount(numQues);
+
+    if (numQues >= 5 && !triggeredRedirect) {
+      setTriggeredRedirect(true);
+      setTimeout(() => {
+        navigate('/post-call');
+      }, 10000);
+    }
+  } catch (error) {
+    console.error('Error polling call status:', error);
+  }
+};
+
+
+    const pollingInterval = setInterval(pollCallStatus, 3000); // Poll every 3s
+
+    const messageCycle = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % messages.length);
     }, 2000);
 
-    const fallbackTimer = setTimeout(() => {
-      navigate('/post-call');
-    }, 20000);
-
     return () => {
-      clearInterval(interval);
-      clearTimeout(fallbackTimer);
+      clearInterval(pollingInterval);
+      clearInterval(messageCycle);
     };
-  }, [navigate]);
-
-  if (!statusChecked) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-lg font-medium text-gray-700">
-        Checking AI call status...
-      </div>
-    );
-  }
+  }, [navigate, triggeredRedirect]);
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center px-4 font-poppins">
