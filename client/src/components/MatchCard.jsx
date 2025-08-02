@@ -1,85 +1,164 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { UserRound, Heart } from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
-// Dummy fallback
-const dummyMatch = {
-  name: "Aanya Sharma",
-  email: "aanya@example.com",
-  compatibility: 86,
-  embedding: [72, 85, 64, 53, 90],
-};
+const MatchCard = ({ match, onToggleShortlist, isShortlisted }) => {
+  const [showDetails, setShowDetails] = useState(false);
 
-const labelMap = [
-  "Cleanliness",
-  "Sociability",
-  "Conflict Tolerance",
-  "Lifestyle",
-  "Communication",
-];
+  const {
+    name,
+    age,
+    location,
+    budget,
+    compatibility,
+    vector = [],
+    summary = "No summary available.",
+    interests = [],
+    profession,
+    bio,
+    avatar = `https://api.dicebear.com/7.x/lorelei/svg?seed=${name}`,
+  } = match;
 
-const MatchCard = ({ match = dummyMatch }) => {
-  const scores = match.embedding || [];
+  const labels = [
+    "Cleanliness",
+    "Sociability",
+    "Conflict Tolerance",
+    "Lifestyle",
+    "Communication",
+  ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="w-full sm:w-[420px]"
-    >
-      <div className="bg-white border border-violet-100 rounded-3xl p-6 shadow-md hover:shadow-lg transition-all duration-300">
-        {/* Header: Name and Email */}
-        <div className="flex items-start gap-4 mb-5">
-          <div className="bg-violet-100 text-violet-700 p-3 rounded-full">
-            <UserRound className="w-6 h-6" />
-          </div>
+    <>
+      <motion.div
+        className={`rounded-2xl shadow-md p-5 border border-gray-200 bg-white hover:shadow-lg transition-all duration-300 w-full max-w-xl mx-auto`}
+      >
+        <div className="flex gap-4 items-center mb-4">
+          <img src={avatar} alt={name} className="w-14 h-14 rounded-full" />
           <div>
-            <h2 className="text-xl font-bold text-gray-800">{match.name}</h2>
-            <p className="text-sm text-gray-500">{match.email}</p>
+            <h3 className="text-xl font-semibold text-gray-800">{name}, {age}</h3>
+            <p className="text-sm text-gray-500">{location}</p>
+            <p className="text-sm text-gray-500">Budget: ₹{budget}</p>
           </div>
         </div>
 
-        {/* Compatibility */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2 text-pink-600">
-            <Heart className="w-5 h-5" />
-            <span className="text-sm font-medium">Compatibility Score</span>
+        <div className="mt-2 mb-4">
+          <p className="font-medium text-sm text-gray-700">Compatibility Score</p>
+          <div className="w-full bg-gray-200 h-2 rounded-full">
+            <div
+              className="bg-green-500 h-2 rounded-full"
+              style={{ width: `${compatibility}%` }}
+            ></div>
           </div>
-          <span className="text-xl font-semibold text-violet-700">
-            {match.compatibility}%
-          </span>
+          <p className="text-xs text-gray-500 mt-1">{compatibility}% match</p>
         </div>
 
-        {/* Scores */}
-        <div className="space-y-4 mt-2">
-          {scores.map((value, index) => (
-            <div key={index}>
-              <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">
-                  {labelMap[index]}
-                </span>
-                <span className="text-sm text-gray-500">{value}%</span>
-              </div>
-              <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full"
-                  style={{
-                    width: `${value}%`,
-                    background:
-                      value >= 80
-                        ? "#8b5cf6"
-                        : value >= 50
-                        ? "#c084fc"
-                        : "#f472b6",
-                  }}
-                />
-              </div>
-            </div>
+        <div className="flex gap-2 flex-wrap mt-2">
+          {interests.slice(0, 3).map((int, i) => (
+            <span
+              key={i}
+              className="bg-pink-100 text-pink-700 text-xs font-medium px-2 py-1 rounded-full"
+            >
+              {int}
+            </span>
           ))}
         </div>
-      </div>
-    </motion.div>
+
+        <div className="flex justify-between items-center mt-4">
+          <button
+            className="text-blue-600 text-sm underline hover:text-blue-800"
+            onClick={() => setShowDetails(true)}
+          >
+            Read More
+          </button>
+          <button
+            onClick={onToggleShortlist}
+            className={`text-sm px-3 py-1 rounded-full ${
+              isShortlisted
+                ? "bg-green-100 text-green-800"
+                : "bg-gray-100 text-gray-700"
+            } hover:shadow-sm`}
+          >
+            {isShortlisted ? "Shortlisted" : "Shortlist"}
+          </button>
+        </div>
+      </motion.div>
+
+      <AnimatePresence>
+        {showDetails && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              exit={{ y: 100 }}
+              className="bg-white rounded-xl p-6 max-w-lg w-full shadow-xl relative"
+            >
+              <button
+                onClick={() => setShowDetails(false)}
+                className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+              >
+                <X />
+              </button>
+
+              <div className="flex items-center gap-4 mb-4">
+                <img
+                  src={avatar}
+                  alt={name}
+                  className="w-16 h-16 rounded-full"
+                />
+                <div>
+                  <h2 className="text-xl font-semibold">{name}, {age}</h2>
+                  <p className="text-sm text-gray-500">{profession}</p>
+                  <p className="text-sm text-gray-500">{location} | ₹{budget}</p>
+                </div>
+              </div>
+
+              <div className="space-y-3 mt-3">
+                <p className="text-gray-800 font-medium">Bio:</p>
+                <p className="text-sm text-gray-600">{bio || "No bio available."}</p>
+
+                <p className="text-gray-800 font-medium mt-3">Trait Breakdown:</p>
+                {vector.map((score, i) => (
+                  <div key={i}>
+                    <p className="text-sm text-gray-600">{labels[i]}</p>
+                    <div className="w-full bg-gray-200 h-2 rounded-full">
+                      <div
+                        className="bg-indigo-500 h-2 rounded-full"
+                        style={{ width: `${score}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-xs text-gray-500">{score}%</p>
+                  </div>
+                ))}
+
+                <div className="mt-4">
+                  <p className="text-gray-800 font-medium">Summary:</p>
+                  <p className="text-sm text-gray-700">{summary}</p>
+                </div>
+
+                <div className="mt-4">
+                  <p className="text-gray-800 font-medium">Keywords:</p>
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    {interests.map((keyword, i) => (
+                      <span
+                        key={i}
+                        className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

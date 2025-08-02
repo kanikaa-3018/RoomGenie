@@ -42,8 +42,9 @@ const SuccessPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-softGray via-secondary/20 to-accent/20 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white py-12 px-4">
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
@@ -51,39 +52,40 @@ const SuccessPage = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            className="bg-gradient-to-r from-accent to-primary p-6 rounded-full w-24 h-24 mx-auto mb-8 flex items-center justify-center"
+            className="bg-[#B38FB5] p-6 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center shadow-xl"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
           >
             <CheckCircle className="h-12 w-12 text-white" />
           </motion.div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Application Submitted Successfully!
+          <h1 className="text-4xl md:text-5xl font-bold text-[#4b0082] mb-4">
+            You're All Set! 🎉
           </h1>
-          <p className="text-xl text-darkGray max-w-2xl mx-auto">
-            Thank you for choosing RoomMuse! We're processing your roommate matches and will have exciting updates soon.
+          <p className="text-lg text-[#5c5470] max-w-2xl mx-auto">
+            Thank you for choosing <span className="font-semibold text-[#b388eb]">RoomMuse</span>. Our team is working to pair you with your ideal roommate.
           </p>
         </motion.div>
 
+        {/* Shortlisted */}
         {user?.shortlisted?.length > 0 && (
           <motion.div
-            className="bg-white rounded-3xl p-8 shadow-2xl border border-primary/10 mb-12"
+            className="bg-white/60 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-[#d3adf7]/40 mb-12"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="flex items-center mb-6">
-              <Heart className="h-6 w-6 text-accent mr-3 fill-current" />
-              <h2 className="text-2xl font-bold text-gray-900">
+              <Heart className="h-6 w-6 text-[#b388eb] mr-3 fill-current" />
+              <h2 className="text-2xl font-bold text-[#4b0082]">
                 Your Shortlisted Matches
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {user.shortlisted.map((match, index) => (
                 <motion.div
                   key={match.id}
-                  className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-4 border border-primary/10"
+                  className="bg-white rounded-2xl p-4 border border-[#e5d4f9] shadow-md hover:shadow-xl transition-all"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -92,21 +94,21 @@ const SuccessPage = () => {
                     <img
                       src={match.image}
                       alt={match.name}
-                      className="w-12 h-12 rounded-full object-cover"
+                      className="w-12 h-12 rounded-full object-cover border-2 border-[#d3adf7]"
                     />
                     <div>
-                      <h3 className="font-semibold text-gray-900">{match.name}</h3>
-                      <p className="text-sm text-darkGray">
+                      <h3 className="font-semibold text-[#4b0082]">{match.name}</h3>
+                      <p className="text-sm text-[#7c6a93]">
                         {match.age} • {match.location}
                       </p>
                     </div>
                   </div>
-                  <div className="bg-white rounded-lg p-3">
+                  <div className="bg-[#f3ecff] rounded-lg p-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-darkGray">
+                      <span className="text-sm font-medium text-[#5c5470]">
                         Compatibility
                       </span>
-                      <span className="text-lg font-bold text-primary">
+                      <span className="text-lg font-bold text-[#a855f7]">
                         {match.compatibility}%
                       </span>
                     </div>
@@ -117,13 +119,14 @@ const SuccessPage = () => {
           </motion.div>
         )}
 
+        {/* Timeline */}
         <motion.div
-          className="bg-white rounded-3xl p-8 shadow-2xl border border-primary/10 mb-12"
+          className="bg-white/60 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-[#d3adf7]/40 mb-12"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-2xl font-bold text-[#4b0082] mb-8 text-center">
             What Happens Next?
           </h2>
           <div className="space-y-6">
@@ -136,12 +139,12 @@ const SuccessPage = () => {
                 transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
               >
                 <div
-                  className={`p-3 rounded-full ${
+                  className={`p-3 rounded-full shadow-md ${
                     step.status === "completed"
-                      ? "bg-accent"
+                      ? "bg-[#b388eb]"
                       : step.status === "current"
-                      ? "bg-gradient-to-r from-primary to-accent"
-                      : "bg-gray-300"
+                      ? "bg-gradient-to-r from-[#B38FB5] to-[#d3adf7]"
+                      : "bg-[#e2d6f6]"
                   }`}
                 >
                   <step.icon className="h-6 w-6 text-white" />
@@ -150,16 +153,16 @@ const SuccessPage = () => {
                   <h3
                     className={`text-lg font-semibold mb-2 ${
                       step.status === "completed" || step.status === "current"
-                        ? "text-gray-900"
+                        ? "text-[#4b0082]"
                         : "text-gray-500"
                     }`}
                   >
                     {step.title}
                   </h3>
                   <p
-                    className={`${
+                    className={`text-sm ${
                       step.status === "completed" || step.status === "current"
-                        ? "text-darkGray"
+                        ? "text-[#6b5c80]"
                         : "text-gray-400"
                     }`}
                   >
@@ -168,8 +171,8 @@ const SuccessPage = () => {
                   {step.status === "current" && (
                     <div className="mt-3">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        <span className="text-sm font-medium text-primary">
+                        <div className="w-2 h-2 bg-[#b388eb] rounded-full animate-pulse" />
+                        <span className="text-sm font-medium text-[#b388eb]">
                           In Progress
                         </span>
                       </div>
@@ -181,43 +184,43 @@ const SuccessPage = () => {
           </div>
         </motion.div>
 
+        {/* Final CTA */}
         <motion.div
-          className="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 text-white text-center"
+          className="bg-gradient-to-br from-[#B38FB5] to-[#B38FB5] rounded-3xl p-8 text-white text-center shadow-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <h2 className="text-2xl font-bold mb-4">We'll Be In Touch Soon!</h2>
           <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-            Our admin team typically processes applications within 24-48 hours.
+            Our admin team typically processes applications within 24–48 hours.
             You'll receive an email with your roommate assignment and next steps for move-in coordination.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              onClick={() => navigate("/")}
-              className="bg-white text-primary px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-all flex items-center space-x-2 justify-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>Back to Home</span>
-              <ArrowRight className="h-5 w-5" />
-            </motion.button>
-          </div>
+          <motion.button
+            onClick={() => navigate("/")}
+            className="bg-white text-[#B38FB5] px-6 py-3 rounded-full font-semibold hover:bg-[#f7e9ff] transition-all flex items-center space-x-2 justify-center mx-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>Back to Home</span>
+            <ArrowRight className="h-5 w-5" />
+          </motion.button>
         </motion.div>
 
+        {/* Footer */}
         <motion.div
           className="text-center mt-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <p className="text-darkGray">
+          <p className="text-[#6b5c80]">
             Questions? Email us at{" "}
-            <span className="text-primary font-semibold">
+            <span className="text-[#B38FB5] font-semibold">
               hello@roommuse.com
             </span>{" "}
             or call{" "}
-            <span className="text-primary font-semibold">(555) 123-ROOM</span>
+            <span className="text-[#B38FB5] font-semibold">(555) 123-ROOM</span>
           </p>
         </motion.div>
       </div>
