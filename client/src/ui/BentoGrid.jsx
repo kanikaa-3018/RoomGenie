@@ -1,13 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export const BentoGrid = () => {
+const BentoGrid = () => {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12 text-slate-800">
+    <section className="mx-auto max-w-7xl px-4 py-12 text-slate-800 font-[Poppins]">
+      {/* Header */}
       <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end md:px-8">
-        <h2 className="max-w-lg text-4xl font-bold md:text-5xl">
-          Grow faster with our
-          <span className="text-slate-400"> all in one solution</span>
+        <h2 className="w-full md:w-1/2 text-3xl font-bold md:text-5xl leading-tight">
+          Discover the smarter way to find your
+          <span className="text-slate-500"> perfect roommate</span>
         </h2>
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -70,7 +71,9 @@ const BounceCard = ({ className, children }) => {
 
 const CardTitle = ({ children }) => {
   return (
-    <h3 className="mx-auto text-center text-3xl font-semibold">{children}</h3>
+    <h3 className="mx-auto mb-2 text-center text-2xl font-semibold">
+      {children}
+    </h3>
   );
 };
 

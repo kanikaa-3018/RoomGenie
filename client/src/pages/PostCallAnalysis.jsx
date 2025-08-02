@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -25,51 +25,97 @@ const PostCallAnalysis = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [preferences, setPreferences] = useState("");
   const [showChart, setShowChart] = useState(false);
-  const [scores, setScores] = useState({
-    cleanliness: 85,
-    sociability: 72,
-    conflictTolerance: 90,
-    lifestyle: 68,
-    communication: 88,
-  });
+  const [summary, setSummary] = useState("");
+  const [sentiment, setSentiment] = useState("");
+  const [scores, setScores] = useState([ 60,50,45,30,22]
+   
+  );
 
   const user = JSON.parse(localStorage.getItem("user") || "null");
   const navigate = useNavigate();
 
-  const traitDescriptions = {
-    cleanliness:
-      "How important is tidiness and organization in your living space",
-    sociability: "Your preference for social interaction with roommates",
-    conflictTolerance: "How you handle disagreements and resolve conflicts",
-    lifestyle: "Your daily routines, sleep schedule, and general habits",
-    communication: "How openly and frequently you communicate with others",
-  };
+const labelMap = [
+  "Cleanliness",
+  "Sociability",
+  "Conflict Tolerance",
+  "Lifestyle",
+  "Communication",
+];
+
+const traitDescriptions = [
+  "How important is tidiness and organization in your living space",
+  "Your preference for social interaction with roommates",
+  "How you handle disagreements and resolve conflicts",
+  "Your daily routines, sleep schedule, and general habits",
+  "How openly and frequently you communicate with others",
+];
+
+
+  const chartData = Object.entries(scores).map(([name, value]) => ({
+    name: labelMap[name] || name,
+    value,
+  }));
 
   const handleScoreChange = (trait, value) => {
     setScores((prev) => ({ ...prev, [trait]: value }));
   };
 
-  const handleContinue = async () => {
-    try {
-      // await axios.post(`/api/users/${user._id}/post-call-analysis`, {
-      //   scores,
-      //   preferences: preferences.trim() || undefined,
-      // });
-      navigate("/compatibility");
-    } catch (err) {
-      console.error("Failed to update user post-call data", err);
-    }
+const fetchSummary = async () => {
+  try {
+    const res = await axios.get(
+      `https://c3fa96c76aba.ngrok-free.app/api/users/analysis/${user?.email}`
+    );
+    const data = res.data;
+
+    setSummary(data.summary || "No summary available.");
+    setSentiment(data.sentiment || "Neutral");
+
+    const traits = data.traits || {};
+
+    // Convert trait map to ordered array
+    const updatedScores = [
+      traits.question1 || 30,
+      traits.question2 || 30,
+      traits.question3 || 30,
+      traits.question4 || 30,
+      traits.question5 || 30,
+    ];
+
+    setScores(updatedScores);
+  } catch (err) {
+    console.error("Failed to fetch summary", err);
+  }
+};
+
+
+const handleSave = async () => {
+  try {
+    await axios.post(
+      `https://c3fa96c76aba.ngrok-free.app/api/users/update-vector`,
+      {
+        email: user?.email,
+        vector: scores,
+      }
+    );
+    await fetchSummary();
+    setIsEditing(false);
+  } catch (err) {
+    console.error("Failed to save compatibility vector", err);
+  }
+};
+
+
+  const handleContinue = () => {
+    navigate("/compatibility");
   };
 
-  const chartData = Object.entries(scores).map(([name, value]) => ({
-    name,
-    value,
-  }));
+  useEffect(() => {
+    fetchSummary();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] py-14 px-6 font-[Poppins]">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
@@ -98,7 +144,6 @@ const PostCallAnalysis = () => {
           </p>
         </motion.div>
 
-        {/* Toggle Button */}
         <div className="text-right mb-6">
           <button
             onClick={() => setShowChart(!showChart)}
@@ -109,7 +154,6 @@ const PostCallAnalysis = () => {
           </button>
         </div>
 
-        {/* Main Section */}
         {showChart ? (
           <motion.div
             className="bg-white rounded-3xl p-10 shadow-xl border border-[#B38FB510] mb-10 h-[400px] flex items-center justify-center"
@@ -160,7 +204,7 @@ const PostCallAnalysis = () => {
                   >
                     <div className="flex items-center justify-between">
                       <h3 className="text-lg font-semibold capitalize text-[#563F57]">
-                        {trait.replace(/([A-Z])/g, " $1").trim()}
+                        {labelMap[trait]}
                       </h3>
                       <span className="text-xl font-bold text-[#B38FB5]">
                         {score}%
@@ -211,12 +255,24 @@ const PostCallAnalysis = () => {
                       whileTap={{ scale: 0.95 }}
                     >
                       <Edit3 className="h-5 w-5" />
-                      <span >Edit My Profile</span>
+                      <span>Edit My Profile</span>
                     </motion.button>
                   </div>
                 </motion.div>
               )}
             </motion.div>
+
+            {!isEditing && (
+              <div className="bg-white rounded-3xl p-8 shadow-md mb-10 text-center">
+                <h3 className="text-xl font-semibold text-[#563F57] mb-2">
+                  AI-Generated Summary
+                </h3>
+                <p className="text-gray-700 italic">{summary}</p>
+                <p className="text-sm mt-3 text-gray-500">
+                  Sentiment: <strong>{sentiment}</strong>
+                </p>
+              </div>
+            )}
 
             {isEditing && (
               <motion.div
@@ -242,7 +298,6 @@ const PostCallAnalysis = () => {
           </>
         )}
 
-        {/* Bottom Buttons */}
         <motion.div
           className="text-center"
           initial={{ opacity: 0 }}
@@ -258,8 +313,8 @@ const PostCallAnalysis = () => {
                 Cancel
               </button>
               <motion.button
-                onClick={() => setIsEditing(false)}
-                className="bg-gradient-to-r from-[#B38FB5] to-[#563F57] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl flex items-center space-x-2"
+                onClick={handleSave}
+                className="bg-[#563F57] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl flex items-center space-x-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

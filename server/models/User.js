@@ -13,10 +13,7 @@ const traitSubSchema = new mongoose.Schema({
     min: 0,
     max: 10,
   },
-  embedding: {
-    type: [Number],
-    required: true,
-  }
+  
 }, { _id: false });
 
 const userSchema = new mongoose.Schema({
@@ -25,7 +22,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, trim: true },
   age: { type: Number, required: true, min: 16 },
   ageGroup: { type: String, enum: ['16-18', '18-25', '25+'], required: true },
-
+  compatibilityVector: [Number],
   location: { type: String },
   budget: { type: String },
 
