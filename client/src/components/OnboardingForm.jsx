@@ -116,7 +116,7 @@ const OnboardingForm = () => {
 
     try {
       const response = await fetch(
-        "https://c3fa96c76aba.ngrok-free.app/api/auth/register",
+        "https://c3fa96c76aba.ngrok-free.app/api/users/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

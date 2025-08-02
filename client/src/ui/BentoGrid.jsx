@@ -1,5 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  Mic,
+  Brain,
+  Stars,
+  ListChecks,
+  Users2,
+  Sparkles,
+} from "lucide-react";
 
 const BentoGrid = () => {
   return (
@@ -18,50 +26,65 @@ const BentoGrid = () => {
           Learn more
         </motion.button>
       </div>
+
+      {/* Top Row */}
       <div className="mb-4 grid grid-cols-12 gap-4">
         <BounceCard className="col-span-12 md:col-span-4">
-          <CardTitle>Do a thing</CardTitle>
-          <div className="absolute bottom-0 left-4 right-4 top-32 translate-y-8 rounded-t-2xl bg-gradient-to-br from-violet-400 to-indigo-400 p-4 transition-transform duration-[250ms] group-hover:translate-y-4 group-hover:rotate-[2deg]">
-            <span className="block text-center font-semibold text-indigo-50">
-              FEATURE DEMO HERE
-            </span>
-          </div>
+          <CardTitle icon={<Stars className="text-sky-500" />}>
+            Minimal Input, Maximum Insight
+          </CardTitle>
+          <PastelBlock
+            from="from-[#d6e4f0]"
+            to="to-[#b8cdd8]"
+            text="Just answer a few questions. Our ML algorithms infer deep compatibility insights based on subtle patterns—no need for endless forms."
+          />
         </BounceCard>
+
         <BounceCard className="col-span-12 md:col-span-8">
-          <CardTitle>Do another thing</CardTitle>
-          <div className="absolute bottom-0 left-4 right-4 top-32 translate-y-8 rounded-t-2xl bg-gradient-to-br from-amber-400 to-orange-400 p-4 transition-transform duration-[250ms] group-hover:translate-y-4 group-hover:rotate-[2deg]">
-            <span className="block text-center font-semibold text-orange-50">
-              FEATURE DEMO HERE
-            </span>
-          </div>
+          <CardTitle icon={<Mic className="text-rose-400" />}>
+            Voice-Based Preference Capture (Omnidim.ai)
+          </CardTitle>
+          <PastelBlock
+            from="from-[#f9e0e0]"
+            to="to-[#f7d4d4]"
+            text="Talk naturally to our Omnidim-powered Voice AI. It captures preferences, tone, intent, and personality traits to build a humanized profile."
+          />
         </BounceCard>
       </div>
+
+      {/* Bottom Row */}
       <div className="grid grid-cols-12 gap-4">
         <BounceCard className="col-span-12 md:col-span-8">
-          <CardTitle>And this too</CardTitle>
-          <div className="absolute bottom-0 left-4 right-4 top-32 translate-y-8 rounded-t-2xl bg-gradient-to-br from-green-400 to-emerald-400 p-4 transition-transform duration-[250ms] group-hover:translate-y-4 group-hover:rotate-[2deg]">
-            <span className="block text-center font-semibold text-emerald-50">
-              FEATURE DEMO HERE
-            </span>
-          </div>
+          <CardTitle icon={<Brain className="text-emerald-500" />}>
+            AI Compatibility Matching
+          </CardTitle>
+          <PastelBlock
+            from="from-[#d2f1e4]"
+            to="to-[#b7e4cd]"
+            text="Using machine learning, we match users based on emotional compatibility, lifestyle alignment, and shared values—beyond just filters."
+          />
         </BounceCard>
+
         <BounceCard className="col-span-12 md:col-span-4">
-          <CardTitle>And finally this</CardTitle>
-          <div className="absolute bottom-0 left-4 right-4 top-32 translate-y-8 rounded-t-2xl bg-gradient-to-br from-pink-400 to-red-400 p-4 transition-transform duration-[250ms] group-hover:translate-y-4 group-hover:rotate-[2deg]">
-            <span className="block text-center font-semibold text-red-50">
-              FEATURE DEMO HERE
-            </span>
-          </div>
+          <CardTitle icon={<ListChecks className="text-purple-500" />}>
+            Smart Shortlisting & Admin Review
+          </CardTitle>
+          <PastelBlock
+            from="from-[#f5e6f7]"
+            to="to-[#e2d4ec]"
+            text="You choose who you vibe with, and our admins ensure matches meet your safety and comfort criteria before final assignment."
+          />
         </BounceCard>
       </div>
     </section>
   );
 };
 
+// Utility Components
 const BounceCard = ({ className, children }) => {
   return (
     <motion.div
-      whileHover={{ scale: 0.95, rotate: "-1deg" }}
+      whileHover={{ scale: 0.97, rotate: "-1deg" }}
       className={`group relative min-h-[300px] cursor-pointer overflow-hidden rounded-2xl bg-slate-100 p-8 ${className}`}
     >
       {children}
@@ -69,11 +92,24 @@ const BounceCard = ({ className, children }) => {
   );
 };
 
-const CardTitle = ({ children }) => {
+const CardTitle = ({ children, icon }) => {
   return (
-    <h3 className="mx-auto mb-2 text-center text-2xl font-semibold">
-      {children}
-    </h3>
+    <div className="mx-auto mb-4 flex items-center justify-center gap-2 text-center text-2xl font-semibold text-slate-700">
+      {icon}
+      <span>{children}</span>
+    </div>
+  );
+};
+
+const PastelBlock = ({ from, to, text }) => {
+  return (
+    <div
+      className={`absolute bottom-0 left-4 right-4 top-32 translate-y-8 rounded-t-2xl bg-gradient-to-br ${from} ${to} p-4 transition-transform duration-[250ms] group-hover:translate-y-4 group-hover:rotate-[2deg]`}
+    >
+      <span className="block text-center font-medium text-slate-700 leading-relaxed">
+        {text}
+      </span>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const lilac = "#b57bdb";
 const grayText = "#5a5a5a";
@@ -14,12 +15,7 @@ const Hero = () => {
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
             <div className="flex items-center flex-shrink-0">
               <a href="#" title="" className="inline-flex">
-                <span className="sr-only"> Room Genie </span>
-                {/* <img
-                  class="w-auto h-8"
-                  src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/logo.svg"
-                  alt=""
-                /> */}
+                <span className="text-black font-medium"> RG </span>
               </a>
             </div>
 
@@ -30,7 +26,7 @@ const Hero = () => {
                 className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none hover:text-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               >
                 {" "}
-                All Artworks{" "}
+                Our Features{" "}
               </a>
 
               <a
@@ -39,7 +35,7 @@ const Hero = () => {
                 className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               >
                 {" "}
-                All Artists{" "}
+                User FLow{" "}
               </a>
 
               <a
@@ -48,32 +44,32 @@ const Hero = () => {
                 className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               >
                 {" "}
-                Sell Your Artwork{" "}
+                testimonials{" "}
               </a>
             </div>
 
             <div className="flex items-center justify-end ml-auto">
               <div className="hidden lg:flex lg:items-center lg:space-x-8">
-                <a
-                  href="#"
+                <Link
+                  to="/onboarding"
                   title=""
                   className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                 >
                   {" "}
-                  Create Free Account{" "}
-                </a>
+                  Find Your Match{" "}
+                </Link>
 
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   title=""
                   className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                 >
                   {" "}
                   Login{" "}
-                </a>
+                </Link>
               </div>
 
-              <div className="flex items-center justify-end space-x-5">
+              {/* <div className="flex items-center justify-end space-x-5">
                 <button
                   type="button"
                   className="p-2 -m-2 text-gray-900 transition-all duration-200 lg:hidden hover:text-gray-700"
@@ -118,7 +114,7 @@ const Hero = () => {
                     3{" "}
                   </span>
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -148,15 +144,13 @@ const Hero = () => {
                 and personal preferences — not just age or location.
               </p>
 
-              <div class="mt-8 lg:mt-10">
-                <a
-                  href="#"
-                  title=""
-                  class="inline-flex items-center justify-center px-8 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 font-pj hover:bg-gray-600"
-                  role="button"
+              <div className="mt-8 lg:mt-10">
+                <Link
+                  to="/onboarding"
+                  className="inline-flex items-center justify-center px-8 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 font-pj hover:bg-gray-600"
                 >
                   Find your perfect match
-                </a>
+                </Link>
               </div>
 
               <div class="mt-8 lg:mt-12">
@@ -316,16 +310,16 @@ const Hero = () => {
 
               <div class="inline-grid grid-cols-2 mt-8 gap-x-8">
                 <div>
-                  <p class="text-4xl font-bold text-gray-900">50k+</p>
+                  <p class="text-4xl font-bold text-gray-900">500+</p>
                   <p class="mt-2 text-base font-medium text-gray-500">
-                    Omnidim
+                    Users
                   </p>
                 </div>
 
                 <div>
-                  <p class="text-4xl font-bold text-gray-900">17k+</p>
+                  <p class="text-4xl font-bold text-gray-900">90% +</p>
                   <p class="mt-2 text-base font-medium text-gray-500">
-                    Artists
+                    Accurate
                   </p>
                 </div>
               </div>
@@ -345,19 +339,12 @@ const Hero = () => {
                       </div>
                       <div class="p-8">
                         <p class="text-lg font-bold text-gray-900">
-                          Ely-The Angry Girl
+                          Curated Shortlists & Admin Review
                         </p>
                         <p class="mt-6 text-xs font-medium tracking-widest text-gray-500 uppercase">
-                          Reserved Price
+                           Our admin system ensures compatibility 
                         </p>
-                        <div class="flex items-end mt-1">
-                          <p class="text-lg font-bold text-gray-900">
-                            2.00 ETH
-                          </p>
-                          <p class="ml-2 text-sm font-medium text-gray-500">
-                            ($9,394)
-                          </p>
-                        </div>
+                        
                         <div class="grid grid-cols-2 mt-7 gap-x-4">
                           <a
                             href="#"
@@ -365,7 +352,7 @@ const Hero = () => {
                             class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-white transition-all duration-200 bg-gray-900 border border-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
                             role="button"
                           >
-                            Place a bid
+                            Submit Shortlist
                           </a>
 
                           <a
@@ -374,7 +361,7 @@ const Hero = () => {
                             class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-gray-900 transition-all duration-200 bg-transparent border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                             role="button"
                           >
-                            View artwork
+                            Admin Process
                           </a>
                         </div>
                       </div>
@@ -392,19 +379,12 @@ const Hero = () => {
                       </div>
                       <div class="p-8">
                         <p class="text-lg font-bold text-gray-900">
-                          Jenny-Retro Art
+                          Voice Based Preferences
                         </p>
                         <p class="mt-6 text-xs font-medium tracking-widest text-gray-500 uppercase">
-                          Reserved Price
+                        Tell us about yourself 
                         </p>
-                        <div class="flex items-end mt-1">
-                          <p class="text-lg font-bold text-gray-900">
-                            1.67 ETH
-                          </p>
-                          <p class="ml-2 text-sm font-medium text-gray-500">
-                            ($7,627)
-                          </p>
-                        </div>
+                        
                         <div class="grid grid-cols-2 mt-7 gap-x-4">
                           <a
                             href="#"
@@ -412,7 +392,7 @@ const Hero = () => {
                             class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-white transition-all duration-200 bg-gray-900 border border-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
                             role="button"
                           >
-                            Place a bid
+                            Start Onboarding
                           </a>
 
                           <a
@@ -421,7 +401,7 @@ const Hero = () => {
                             class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-gray-900 transition-all duration-200 bg-transparent border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                             role="button"
                           >
-                            View artwork
+                           Learn More
                           </a>
                         </div>
                       </div>
@@ -439,16 +419,12 @@ const Hero = () => {
                       </div>
                       <div class="p-8">
                         <p class="text-lg font-bold text-gray-900">
-                          Naila-The Angry Girl
+                          AI Compatibility Matching
                         </p>
                         <p class="mt-6 text-xs font-medium tracking-widest text-gray-500 uppercase">
-                          Reserved Price
+                          Generates a multi-dimensional profile
                         </p>
-                        <div class="flex items-end mt-1">
-                          <p class="text-lg font-bold text-gray-900">
-                            2.40 ETH
-                          </p>
-                        </div>
+                        
                         <div class="grid grid-cols-2 mt-7 gap-x-4">
                           <a
                             href="#"
@@ -456,7 +432,7 @@ const Hero = () => {
                             class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-white transition-all duration-200 bg-gray-900 border border-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
                             role="button"
                           >
-                            Place a bid
+                            Get Matched
                           </a>
 
                           <a
@@ -465,7 +441,7 @@ const Hero = () => {
                             class="inline-flex items-center justify-center px-4 py-4 text-sm font-bold text-gray-900 transition-all duration-200 bg-transparent border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                             role="button"
                           >
-                            View artwork
+                            View How it Works
                           </a>
                         </div>
                       </div>
