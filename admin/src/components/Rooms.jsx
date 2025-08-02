@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiHome, FiUsers, FiCalendar, FiRefreshCw, FiEdit, FiTrash2, FiPlus } from 'react-icons/fi';
+import { FiHome, FiUsers, FiCalendar, FiRefreshCw, FiEdit, FiTrash2, FiPlus, FiCheck, FiX } from 'react-icons/fi';
 
 const API_BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api/admin`;
 
@@ -66,15 +66,30 @@ const Rooms = () => {
 
   // Handle save edit
   const handleSaveEdit = (matchId) => {
-    if (newRoomAllocation.trim()) {
-      updateRoomAllocation(matchId, newRoomAllocation.trim());
+    if (!newRoomAllocation.trim()) {
+      setError('Please enter a valid room number');
+      return;
     }
+    
+    // Clear any existing errors
+    setError(null);
+    updateRoomAllocation(matchId, newRoomAllocation.trim());
   };
 
   // Cancel edit
   const handleCancelEdit = () => {
     setEditingRoom(null);
     setNewRoomAllocation('');
+    setError(null); // Clear any errors when canceling
+  };
+
+  // Handle key press in edit input
+  const handleKeyPress = (e, matchId) => {
+    if (e.key === 'Enter') {
+      handleSaveEdit(matchId);
+    } else if (e.key === 'Escape') {
+      handleCancelEdit();
+    }
   };
 
   useEffect(() => {
@@ -206,20 +221,24 @@ const Rooms = () => {
                             type="text"
                             value={newRoomAllocation}
                             onChange={(e) => setNewRoomAllocation(e.target.value)}
-                            className="border border-gray-300 rounded px-2 py-1 text-sm w-24"
-                            placeholder="Room number"
+                            onKeyDown={(e) => handleKeyPress(e, room._id)}
+                            className="border border-gray-300 rounded px-2 py-1 text-sm w-32 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                            placeholder="Enter room number"
+                            autoFocus
                           />
                           <button
                             onClick={() => handleSaveEdit(room._id)}
-                            className="text-green-600 hover:text-green-700"
+                            className="text-green-600 hover:text-green-700 p-1 rounded hover:bg-green-50 transition-colors"
+                            title="Save changes"
                           >
                             <FiCheck className="w-4 h-4" />
                           </button>
                           <button
                             onClick={handleCancelEdit}
-                            className="text-red-600 hover:text-red-700"
+                            className="text-red-600 hover:text-red-700 p-1 rounded hover:bg-red-50 transition-colors"
+                            title="Cancel editing"
                           >
-                            <FiTrash2 className="w-4 h-4" />
+                            <FiX className="w-4 h-4" />
                           </button>
                         </div>
                       ) : (
