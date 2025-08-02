@@ -55,7 +55,7 @@ const PostCallAnalysis = () => {
   const fetchSummary = async () => {
     try {
       const res = await axios.get(
-        `https://354300db352d.ngrok-free.app/api/users/analysis/${user?.email}`
+        `${import.meta.env.VITE_API_URL}/api/users/analysis/${user?.email}`
       );
 
       const dataRes = res.data;
@@ -73,7 +73,7 @@ const PostCallAnalysis = () => {
     try {
       // Save vector scores
       await axios.post(
-        `https://c3fa96c76aba.ngrok-free.app/api/users/update-vector`,
+        `${import.meta.env.VITE_API_URL}/api/users/update-vector`,
         {
           email: user?.email,
           vector: scores,
@@ -103,7 +103,7 @@ const PostCallAnalysis = () => {
     if (user?.email) {
       fetchSummary();
     }
-  }, [user?.email]);
+  }, []);
 
   const handleContinue = () => {
     navigate("/compatibility");

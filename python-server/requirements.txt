@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+python-multipart        # for form uploads (if you're using forms)
+pydantic
+numpy                  # if doing any numeric operations
+scikit-learn           # if using ML models
+pandas                 # for data processing
+pydantic
+requests               # for making HTTP requests
+omnidimension
+fastapi-utils         # for additional FastAPI utilities
+httpx                 # for async HTTP requests              

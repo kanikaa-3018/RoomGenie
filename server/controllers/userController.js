@@ -1,5 +1,8 @@
 const User = require('../models/User.js');
 const Match = require('../models/Match.js');
+const axios = require('axios');
+const dotenv = require('dotenv');
+dotenv.config();
 let activeOmnidimUserEmail = null;
 
 const fetch = (...args) =>
@@ -15,8 +18,8 @@ exports.loginUser = async (req, res) => {
     // Store user for Omnidim webhook tracking
     activeOmnidimUserEmail = email;
 
-    // Trigger FastAPI agent creation
-    const fastApiUrl = "http://localhost:8000/create-agent";
+   
+    const fastApiUrl = `${process.env.PYTHON_API_KEY}/create-agent`;
     const response = await fetch(fastApiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -103,7 +106,7 @@ exports.handleOmnidimWebhook = async (req, res) => {
     }
 
     try {
-      const fastApiUrl = "http://localhost:8000/compatibility"; // or your deployed URL
+      const fastApiUrl = `${process.env.PYTHON_API_KEY}/compatibility`; // or your deployed URL
       const answers = vector.map((v) => parseInt(v)); // Assuming the vector is in [1-10]
       const weights = Array(vector.length).fill(1.0); // Use uniform weights or customize if needed
 

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
+
 import {
   User,
   Mail,
@@ -116,7 +117,7 @@ const OnboardingForm = () => {
 
     try {
       const response = await fetch(
-        "https://354300db352d.ngrok-free.app/api/users/register",
+        `${import.meta.env.VITE_API_URL}/api/users/register`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -134,7 +135,7 @@ const OnboardingForm = () => {
 
       timeoutRef.current = window.setTimeout(() => {
         if (!isMountedRef.current) return;
-        toast.success("Our AI assistant will call you soon! 💬", {
+        toast.success("Login to get a call from our Assistant! 💬", {
           duration: 3000,
         });
         navigate("/");

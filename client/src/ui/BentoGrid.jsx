@@ -11,7 +11,7 @@ import {
 
 const BentoGrid = () => {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12 text-slate-800 font-[Poppins]">
+    <section className="mx-auto max-w-7xl px-4 py-12 text-slate-800 font-[Poppins]" id="bento-grid">
       {/* Header */}
       <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end md:px-8">
         <h2 className="w-full md:w-1/2 text-3xl font-bold md:text-5xl leading-tight">

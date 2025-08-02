@@ -9,7 +9,7 @@ const bgGray = "#f6f6f6";
 
 const Hero = () => {
   return (
-    <section>
+    <section id="#">
       <header className="bg-white">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 xl:px-12">
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
@@ -21,7 +21,7 @@ const Hero = () => {
 
             <div className="hidden lg:flex lg:justify-start lg:ml-16 lg:space-x-8 xl:space-x-14">
               <a
-                href="#"
+                href="#bento-grid"
                 title=""
                 className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none hover:text-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               >
@@ -30,7 +30,7 @@ const Hero = () => {
               </a>
 
               <a
-                href="#"
+                href="#vertical-accordion"
                 title=""
                 className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               >
@@ -39,7 +39,7 @@ const Hero = () => {
               </a>
 
               <a
-                href="#"
+                href="#animated-testimonials"
                 title=""
                 className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               >

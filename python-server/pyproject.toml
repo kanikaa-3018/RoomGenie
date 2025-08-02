@@ -1,0 +1,5 @@
+[tool.poetry.dependencies]
+python = "^3.10"         # or your version
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+watchfiles = "^0.21.0"   # only needed for `--reload`

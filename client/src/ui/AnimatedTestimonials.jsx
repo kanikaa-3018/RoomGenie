@@ -35,7 +35,7 @@ export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
   };
 
   return (
-    <div className="mx-auto w-full px-4 py-20 font-sans antialiased md:px-8 lg:px-12 bg-[#d5bad6] mt-6">
+    <div className="mx-auto w-full px-4 py-20 font-sans antialiased md:px-8 lg:px-12 bg-[#d5bad6] mt-6" id="animated-testimonials">
       {/* Heading */}
       <div className="mb-16 text-center">
         <motion.h2

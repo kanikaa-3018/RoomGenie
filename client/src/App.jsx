@@ -10,11 +10,13 @@ import PostCallAnalysis from "./pages/PostCallAnalysis.jsx";
 import CompatibilityProcessing from "./components/CompatibilityProcessing.jsx";
 import MatchResults from "./pages/MatchResults.jsx";
 import SuccessPage from "./pages/Successpage.jsx";
-
+import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <MainLayout>
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/onboarding" element={<OnboardingForm />} />
         <Route path="/login" element={<LoginPage />} />

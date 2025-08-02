@@ -69,7 +69,7 @@ def create_agent(request: AgentRequest):
 
          "webhook": {
             "enabled": True,
-            "url": "https://354300db352d.ngrok-free.app/api/users/omnidim-data",
+            "url": "ttps://d5560f68d10b.ngrok-free.app/api/users/omnidim-data",
             "include": ["summary", "sentiment", "extracted_variables"],
             "extracted_variables": [
             {"key": "caller_type", "prompt": "Student or working professional classification based on the caller's self-identification."},
