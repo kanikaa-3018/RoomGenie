@@ -4,7 +4,7 @@ const User = require('../models/User');
 // Get all complaints (Admin)
 const getAllComplaints = async (req, res) => {
   try {
-    const { status, category, page = 1, limit = 10 } = req.query;
+    const { status, category, page = 1, limit = 100 } = req.query; // Increased default limit
     
     // Build filter object
     const filter = {};

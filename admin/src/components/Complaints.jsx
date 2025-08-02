@@ -20,7 +20,7 @@ const Complaints = () => {
     try {
       setLoading(true);
       const [complaintsRes, statsRes] = await Promise.all([
-        fetch(`${backendUrl}/api/admin/complaints`),
+        fetch(`${backendUrl}/api/admin/complaints?limit=100`), // Increased limit to show more complaints
         fetch(`${backendUrl}/api/admin/complaints/stats`)
       ]);
 
