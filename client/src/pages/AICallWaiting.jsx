@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Phone, MessageCircle, Sparkles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Phone, MessageCircle, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AICallWaiting = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
@@ -13,47 +13,56 @@ const AICallWaiting = () => {
     "🔍 Connecting you with RoomGenieAI...",
     "💭 Analyzing your vibe & preferences...",
     "📋 Preparing personalized questions...",
-    "✅ Ready to chat!"
+    "✅ Ready to chat!",
   ];
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user._id) {
-      navigate('/login');
+      navigate("/login");
       return;
     }
 
     const pollCallStatus = async () => {
-  try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/omnidim-data`);
-    const data = await res.json();
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/omnidim-data`
+        );
+        const data = await res.json();
 
-    // Access nested value safely
-    const numQues = parseInt(data?.call_report?.extracted_variables?.number_of_ques || "0");
+        const numQues = parseInt(
+          data?.call_report?.extracted_variables?.number_of_ques || "0"
+        );
+        setQuestionCount(numQues);
 
-    setQuestionCount(numQues);
+        if (numQues >= 5 && !triggeredRedirect) {
+          setTriggeredRedirect(true);
+          setTimeout(() => {
+            navigate("/post-call");
+          }, 10000);
+        }
+      } catch (error) {
+        console.error("Error polling call status:", error);
+      }
+    };
 
-    if (numQues >= 5 && !triggeredRedirect) {
-      setTriggeredRedirect(true);
-      setTimeout(() => {
-        navigate('/post-call');
-      }, 10000);
-    }
-  } catch (error) {
-    console.error('Error polling call status:', error);
-  }
-};
-
-
-    const pollingInterval = setInterval(pollCallStatus, 3000); // Poll every 3s
-
+    const pollingInterval = setInterval(pollCallStatus, 3000);
     const messageCycle = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % messages.length);
     }, 2000);
 
+
+    const safetyTimeout = setTimeout(() => {
+      if (!triggeredRedirect) {
+        setTriggeredRedirect(true);
+        navigate("/post-call");
+      }
+    }, 120000);
+
     return () => {
       clearInterval(pollingInterval);
       clearInterval(messageCycle);
+      clearTimeout(safetyTimeout);
     };
   }, [navigate, triggeredRedirect]);
 
@@ -76,14 +85,16 @@ const AICallWaiting = () => {
             <motion.div
               key={i}
               className="absolute inset-0 rounded-full border-[3px] opacity-40 z-0"
-              style={{ borderColor: i % 2 === 0 ? '#B38FB5' : '#563f57' }}
+              style={{ borderColor: i % 2 === 0 ? "#B38FB5" : "#563f57" }}
               animate={{ scale: [1, 1.7], opacity: [0.7, 0] }}
               transition={{ duration: 3, repeat: Infinity, delay }}
             />
           ))}
           <div
             className="relative z-10 w-full h-full rounded-full flex items-center justify-center shadow-xl border-4 border-[#B38FB5]"
-            style={{ background: 'linear-gradient(to right, #563f57, #212f45)' }}
+            style={{
+              background: "linear-gradient(to right, #563f57, #212f45)",
+            }}
           >
             <Phone className="h-20 w-20 text-white animate-pulse" />
           </div>
@@ -129,7 +140,8 @@ const AICallWaiting = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <p className="text-sm">
-            💬 Our AI assistant will call you soon to understand your preferences.
+            💬 Our AI assistant will call you soon to understand your
+            preferences.
           </p>
           <p className="text-xs opacity-70">
             This usually takes 3–5 minutes. Keep your phone handy!
@@ -148,7 +160,7 @@ const AICallWaiting = () => {
               key={i}
               className="w-3 h-3 rounded-full"
               style={{
-                background: 'linear-gradient(to right, #B38FB5, #563f57)',
+                background: "linear-gradient(to right, #B38FB5, #563f57)",
               }}
               animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
