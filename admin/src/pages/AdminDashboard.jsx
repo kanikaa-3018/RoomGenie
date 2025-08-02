@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import MatchRequests from "../components/MatchRequests";
+import Rooms from "../components/Rooms";
+import Complaints from "../components/Complaints";
 import { FiUsers, FiHome, FiAlertCircle, FiClock, FiCheck, FiX } from "react-icons/fi";
 
-const API_BASE_URL = 'http://localhost:5000/api/admin';
+const API_BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api/admin`;
 
 // Card component
 const StatCard = ({ title, value, icon, color = "indigo" }) => {
@@ -162,6 +164,28 @@ const AdminDashboard = () => {
         <Sidebar currentView={currentView} setCurrentView={setCurrentView} />
         <main className="flex-1 p-6 bg-indigo-50 min-h-screen">
           <MatchRequests />
+        </main>
+      </div>
+    );
+  }
+
+  if (currentView === 'rooms') {
+    return (
+      <div className="flex">
+        <Sidebar currentView={currentView} setCurrentView={setCurrentView} />
+        <main className="flex-1 p-6 bg-indigo-50 min-h-screen">
+          <Rooms />
+        </main>
+      </div>
+    );
+  }
+
+  if (currentView === 'complaints') {
+    return (
+      <div className="flex">
+        <Sidebar currentView={currentView} setCurrentView={setCurrentView} />
+        <main className="flex-1 p-6 bg-indigo-50 min-h-screen">
+          <Complaints />
         </main>
       </div>
     );

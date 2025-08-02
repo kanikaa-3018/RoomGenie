@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiUsers, FiClock, FiCheck, FiX, FiHome, FiRefreshCw } from 'react-icons/fi';
 
-const API_BASE_URL = 'http://localhost:5000/api/admin';
+const API_BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api/admin`;
 
 const MatchRequests = () => {
   const [matches, setMatches] = useState([]);
