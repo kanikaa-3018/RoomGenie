@@ -1,6 +1,6 @@
 import { FiBarChart, FiBell, FiDollarSign, FiPlay } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
-import { useWindowSize } from "./useWindowSize";
+import { useWindowSize } from "./UseWindowSize.jsx";
 import { useState } from "react";
 import React from "react";
 import long1 from "../../public/assets/images/long1.jpg";
