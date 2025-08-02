@@ -84,17 +84,11 @@ const RecentMatches = ({ matches }) => {
 
 // Complaint List
 const ComplaintBox = () => {
-  // Sample complaints data - you can replace this with API call later
-  const complaints = [
-    { id: 1, user: "Priya", issue: "AC not working in room B-202." },
-    { id: 2, user: "Aditya", issue: "WiFi is down on 3rd floor." },
-  ];
-
   return (
-    <div className="bg-white shadow-md rounded-lg p-6">
+    <div className="mt-6 bg-white shadow-md rounded-lg p-6">
       <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
         <FiAlertCircle className="text-red-500" />
-        Recent Complaints
+        Complaint Updates
       </h2>
       {complaints.length === 0 ? (
         <p className="text-sm text-gray-600">No complaints yet.</p>
@@ -117,99 +111,29 @@ const ComplaintBox = () => {
 
 // Admin Dashboard
 const AdminDashboard = () => {
-  const [currentView, setCurrentView] = useState('dashboard');
-  const [stats, setStats] = useState({ total: 0, pending: 0, approved: 0, rejected: 0 });
-  const [matches, setMatches] = useState([]);
-
-  // Fetch statistics
-  const fetchStats = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/stats`);
-      const data = await response.json();
-      
-      if (data.success) {
-        setStats(data.stats);
-      }
-    } catch (err) {
-      console.error('Error fetching stats:', err);
-    }
-  };
-
-  // Fetch matches
-  const fetchMatches = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/matches`);
-      const data = await response.json();
-      
-      if (data.success) {
-        setMatches(data.matches);
-      }
-    } catch (err) {
-      console.error('Error fetching matches:', err);
-    }
-  };
-
-  useEffect(() => {
-    fetchStats();
-    fetchMatches();
-  }, []);
-
-  const approvedMatches = matches.filter(match => match.status === 'approved' && match.roomAllocation);
-
-  if (currentView === 'matches') {
-    return (
-      <div className="flex">
-        <Sidebar currentView={currentView} setCurrentView={setCurrentView} />
-        <main className="flex-1 p-6 bg-indigo-50 min-h-screen">
-          <MatchRequests />
-        </main>
-      </div>
-    );
-  }
-
   return (
     <div className="flex">
-      <Sidebar currentView={currentView} setCurrentView={setCurrentView} />
+      <Sidebar />
       <main className="flex-1 p-6 bg-indigo-50 min-h-screen">
         <h1 className="text-2xl font-bold mb-4">Welcome, Admin</h1>
-        <p className="text-gray-700 mb-6">Here's your dashboard overview.</p>
+        <p className="text-gray-700 mb-6">Here’s your dashboard overview.</p>
 
         {/* Top Cards */}
-        <div className="flex flex-wrap gap-4 mb-6">
+        <div className="flex flex-wrap gap-4">
           <StatCard
-            title="Approved Rooms"
-            value={approvedMatches.length}
+            title="Rooms Allotted"
+            value={rooms.length}
             icon={<FiHome />}
-            color="green"
           />
           <StatCard
-            title="Pending Matches"
-            value={stats.pending}
-            icon={<FiClock />}
-            color="yellow"
-          />
-          <StatCard
-            title="Total Matches"
-            value={stats.total}
+            title="User Matches"
+            value={matches.length}
             icon={<FiUsers />}
-            color="indigo"
-          />
-          <StatCard
-            title="Approved Matches"
-            value={stats.approved}
-            icon={<FiCheck />}
-            color="green"
           />
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Recent Matches */}
-          <RecentMatches matches={matches} />
-
-          {/* Complaint Section */}
-          <ComplaintBox />
-        </div>
+        {/* Complaint Section */}
+        <ComplaintBox />
       </main>
     </div>
   );

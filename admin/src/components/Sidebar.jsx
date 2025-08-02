@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import {
-  FiBarChart,
-  FiChevronDown,
   FiChevronsRight,
-  FiDollarSign,
   FiHome,
   FiMonitor,
-  FiShoppingCart,
   FiTag,
   FiUsers,
 } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-const Sidebar = () => {
+const Sidebar = ({ currentView, setCurrentView }) => {
   const [open, setOpen] = useState(true);
-  const [selected, setSelected] = useState("Dashboard");
+  const selected = currentView || "Dashboard";
+  const setSelected = setCurrentView || (() => {});
 
   return (
     <motion.nav
@@ -30,22 +27,30 @@ const Sidebar = () => {
         <Option
           Icon={FiHome}
           title="Dashboard"
-          {...{ selected, setSelected, open }}
-        />
-        <Option
-          Icon={FiMonitor}
-          title="Rooms"
-          {...{ selected, setSelected, open }}
-        />
-        <Option
-          Icon={FiTag}
-          title="Complaints"
-          {...{ selected, setSelected, open }}
+          onClick={() => setSelected('dashboard')}
+          selected={selected === 'dashboard' || selected === 'Dashboard'}
+          {...{ open }}
         />
         <Option
           Icon={FiUsers}
           title="Room Match Requests"
-          {...{ selected, setSelected, open }}
+          onClick={() => setSelected('matches')}
+          selected={selected === 'matches' || selected === 'Room Match Requests'}
+          {...{ open }}
+        />
+        <Option
+          Icon={FiMonitor}
+          title="Rooms"
+          onClick={() => setSelected('rooms')}
+          selected={selected === 'rooms' || selected === 'Rooms'}
+          {...{ open }}
+        />
+        <Option
+          Icon={FiTag}
+          title="Complaints"
+          onClick={() => setSelected('complaints')}
+          selected={selected === 'complaints' || selected === 'Complaints'}
+          {...{ open }}
         />
       </div>
 
@@ -54,13 +59,15 @@ const Sidebar = () => {
   );
 };
 
-const Option = ({ Icon, title, selected, setSelected, open, notifs }) => {
+const Option = ({ Icon, title, selected, open, onClick, notifs }) => {
+  const isSelected = selected === true || selected === title;
+  
   return (
     <motion.button
       layout
-      onClick={() => setSelected(title)}
+      onClick={onClick}
       className={`relative flex h-10 w-full items-center rounded-md transition-colors ${
-        selected === title
+        isSelected
           ? "bg-indigo-100 text-indigo-800"
           : "text-slate-500 hover:bg-slate-100"
       }`}
@@ -69,7 +76,7 @@ const Option = ({ Icon, title, selected, setSelected, open, notifs }) => {
         layout
         className="grid h-full w-10 place-content-center text-lg"
       >
-        <Icon />
+        {React.createElement(Icon)}
       </motion.div>
       {open && (
         <motion.span
