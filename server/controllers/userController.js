@@ -19,7 +19,7 @@ exports.loginUser = async (req, res) => {
     activeOmnidimUserEmail = email;
 
    
-    const fastApiUrl = `http://0.0.0.0:8000/create-agent`;
+    const fastApiUrl = `${process.env.PYTHON_API_KEY}/create-agent`;
     const response = await fetch(fastApiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
