@@ -3,18 +3,16 @@ import { motion } from "framer-motion";
 import { Phone, MessageCircle, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+const messages = [
+  "🔍 Connecting you with RoomGenieAI...",
+  "💭 Analyzing your vibe & preferences...",
+  "📋 Preparing personalized questions...",
+  "✅ Ready to chat!",
+];
+
 const AICallWaiting = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
-  const [questionCount, setQuestionCount] = useState(0);
-  const [triggeredRedirect, setTriggeredRedirect] = useState(false);
   const navigate = useNavigate();
-
-  const messages = [
-    "🔍 Connecting you with RoomGenieAI...",
-    "💭 Analyzing your vibe & preferences...",
-    "📋 Preparing personalized questions...",
-    "✅ Ready to chat!",
-  ];
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -25,22 +23,10 @@ const AICallWaiting = () => {
 
     const pollCallStatus = async () => {
       try {
-        const res = await fetch(
+        // Keep polling to maintain connection, but don't use the data for early redirect
+        await fetch(
           `${import.meta.env.VITE_API_URL}/api/users/omnidim-data`
         );
-        const data = await res.json();
-
-        const numQues = parseInt(
-          data?.call_report?.extracted_variables?.number_of_ques || "0"
-        );
-        setQuestionCount(numQues);
-
-        if (numQues >= 5 && !triggeredRedirect) {
-          setTriggeredRedirect(true);
-          setTimeout(() => {
-            navigate("/post-call");
-          }, 10000);
-        }
       } catch (error) {
         console.error("Error polling call status:", error);
       }
@@ -53,18 +39,15 @@ const AICallWaiting = () => {
 
 
     const safetyTimeout = setTimeout(() => {
-      if (!triggeredRedirect) {
-        setTriggeredRedirect(true);
-        navigate("/post-call");
-      }
-    }, 120000);
+      navigate("/post-call");
+    }, 120000); // 2 minutes
 
     return () => {
       clearInterval(pollingInterval);
       clearInterval(messageCycle);
       clearTimeout(safetyTimeout);
     };
-  }, [navigate, triggeredRedirect]);
+  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center px-4 font-poppins">
