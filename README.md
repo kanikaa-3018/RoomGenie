@@ -85,13 +85,8 @@ I --> J[Admin Assigns Rooms or Handles Complaints]
 
 ## 📷 Screenshots
 
-> Upload screenshots to enhance visibility — here's what you can include:
+<div align="center" style="margin: 20px auto; max-width: 1200px; padding: 20px;"> <table style="border-spacing: 20px;"> <tr> <td align="center"> <strong>✅ User Onboarding Form</strong><br /> <img src="https://github.com/user-attachments/assets/9eef504e-319d-4146-b9b7-aa8441a425dd" width="300" /> </td> <td align="center"> <strong>✅ Voice AI Survey in Action</strong><br /> <img src="https://github.com/user-attachments/assets/ba864215-ffd8-463d-8fab-5185de952c7c" width="300" /> </td> <td align="center"> <strong>✅ Matchmaking Results Page</strong><br /> <img src="https://github.com/user-attachments/assets/8e87d60a-e7f7-43ee-b7d6-e2336bb2dfd6" width="300" /> </td> </tr> <tr> <td align="center"> <strong>✅ Chat Interface</strong><br /> <img src="https://github.com/user-attachments/assets/c621703b-79cc-4def-8fd2-15d4546d12db" width="300" /> </td> <td align="center"> <strong>✅ Admin Dashboard & Room Assignment</strong><br /> <img src="https://github.com/user-attachments/assets/f73238c8-e51f-444d-8fff-8b4d08d7de65" width="300" /> </td> <td align="center"> <strong>✅ Compatibility Calculator Backend</strong><br /> <img src="https://github.com/user-attachments/assets/9162a27f-e8d3-428b-a295-1dc965042e12" width="300" /> </td> </tr> </table> </div>
 
-* ✅ User Onboarding Form
-* ✅ Voice AI Survey in Action
-* ✅ Matchmaking Results Page
-* ✅ Chat Interface
-* ✅ Admin Dashboard & Room Assignment
 
 ---
 
