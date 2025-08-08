@@ -12,7 +12,7 @@ const VerticalAccordion = () => {
 
   return (
     <section className="p-4 bg-[#d6bbd7]" id="vertical-accordion">
-      <div className="mb-8 flex items-start justify-start gap-6 px-4 md:px-8">
+      <div className="mb-8 flex flex-col-reverse lg:flex-row items-start justify-start gap-6 px-4 md:px-8">
         <div className="flex flex-col lg:flex-row h-fit lg:h-[450px] w-full max-w-6xl mx-auto shadow overflow-hidden py-6 self-start">
           {items.map((item) => {
             return (
@@ -29,13 +29,33 @@ const VerticalAccordion = () => {
             );
           })}
         </div>
-        <div className="flex flex-col gap-3 justtify-around pt-2">
-          <h2 className="max-w-lg text-4xl font-bold md:text-7xl">MATCH.</h2>
-          <h2 className="max-w-lg text-4xl font-bold md:text-7xl text-[#563f57]">
+        {/* <div
+          className="flex flex-row justify-center items-center gap-3 pt-2 text-center 
+                lg:flex-col lg:items-start lg:justify-around lg:text-left"
+        >
+          <h2 className="text-4xl font-bold md:text-7xl">MATCH.</h2>
+          <h2 className="text-4xl font-bold md:text-7xl text-[#563f57]">
             CONNECT.
           </h2>
-          <h2 className="max-w-lg text-4xl font-bold md:text-7xl">MOVE IN.</h2>
-        </div>
+          <h2 className="text-4xl font-bold md:text-7xl">MOVE IN.</h2>
+        </div> */}
+
+        <div className="flex flex-col lg:flex-col items-center lg:items-start justify-around pt-2 text-center lg:text-left">
+  {/* For lg and above – full vertical layout */}
+  <div className="hidden lg:flex flex-col gap-3">
+    <h2 className="text-4xl font-bold lg:text-7xl">MATCH.</h2>
+    <h2 className="text-4xl font-bold lg:text-7xl text-[#563f57]">CONNECT.</h2>
+    <h2 className="text-4xl font-bold lg:text-7xl">MOVE IN.</h2>
+  </div>
+
+  {/* For sm and md – single row, centered, short text */}
+  <div className="flex lg:hidden flex-row flex-wrap gap-3 justify-center items-center">
+    <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">MATCH.</h2>
+    <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl text-[#563f57]">CONNECT.</h2>
+    <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">MOVE IN.</h2>
+  </div>
+</div>
+
       </div>
     </section>
   );
@@ -137,8 +157,7 @@ const items = [
     id: 1,
     title: "Set Preferences",
     Icon: FiDollarSign,
-    imgSrc: long3
-      ,
+    imgSrc: long3,
     description:
       "Tell us about your lifestyle, habits, sleep schedule, cleanliness level, and other living preferences. We don’t match based on age or location — just real compatibility.",
   },
@@ -146,8 +165,7 @@ const items = [
     id: 2,
     title: "Smart Matching",
     Icon: FiPlay,
-    imgSrc:
-      long2,
+    imgSrc: long2,
     description:
       "Our AI compares your preferences with others to suggest roommates who complement your lifestyle and personality — think of it like a dating app, but for roommates.",
   },
@@ -155,8 +173,7 @@ const items = [
     id: 3,
     title: "Explore Profiles",
     Icon: FiBell,
-    imgSrc:
-      long4,
+    imgSrc: long4,
     description:
       "Browse through recommended profiles with key info on compatibility — no endless swiping. Just clean, meaningful details to help you decide quickly.",
   },
@@ -164,8 +181,7 @@ const items = [
     id: 4,
     title: "Connect & Chat",
     Icon: FiBarChart,
-    imgSrc:
-      long1,
+    imgSrc: long1,
     description:
       "Once you like a match, start chatting securely to break the ice. RoomGenie makes sure both sides are comfortable and aligned before moving in.",
   },
