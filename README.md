@@ -95,9 +95,6 @@ I --> J[Admin Assigns Rooms or Handles Complaints]
 * [🎙️ Voice AI Survey Experience](https://your-demo-link.com)
 * [📊 Matching Engine Flow](https://your-demo-link.com)
 * [👩‍💼 Admin Room Allocation Panel](https://your-demo-link.com)
-
-> *(Replace links with YouTube/Vimeo or Loom demos)*
-
 ---
 
 ## 📈 Future Improvements
