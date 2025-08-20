@@ -164,10 +164,12 @@ This project is licensed under the [MIT License](LICENSE).
 🚀 AI/Full Stack Developer | Product Thinker | Dreamer
 [GitHub](https://github.com/kanikaa-3018) • [LinkedIn](https://linkedin.com/in/kanika-singhal)
 
+**Disha Kwatra**
+🚀 Full Stack Developer | AI/ML Enthusiast
+[GitHub](https://github.com/xaemonn) • [LinkedIn](https://linkedin.com/in/disha-kwatra-10903p)
+
 > “AI can understand humans — not just what we say, but how we feel. That’s the future RoomGenie brings to finding roommates.”
 
 ---
 
 
-Would you also like **badge icons** (e.g., `Built with ❤️`, `Made with React`, etc.) at the top for aesthetic appeal?
-```
